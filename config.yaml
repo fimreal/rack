@@ -1,0 +1,25 @@
+# 配置模板
+port: "5000"
+workdir: ./
+  
+tools:
+  enable: false
+
+aliyun:
+  enable: false
+  ak_id:
+  ak_secret:
+  region_id:
+
+email:
+  enable: false
+  username:
+  password:
+  smtpserver:
+  smtpserverport:
+
+ip2location:
+  enable: false
+  db_type: IPv4
+  db_level: DB11
+  token: 

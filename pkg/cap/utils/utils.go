@@ -1,4 +1,4 @@
-package cmd
+package caputils
 
 type CommandResult struct {
 	Command    string

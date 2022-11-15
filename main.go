@@ -1,18 +1,12 @@
 package main
 
 import (
-	"os"
-
-	"github.com/fimreal/go-tools/serve"
+	"github.com/fimreal/goutils/ezap"
+	"github.com/fimreal/rack/config"
+	"github.com/fimreal/rack/pkg/serve"
 )
 
 func main() {
-	// 启动端口配置为第一个参数
-	var port string
-	if len(os.Args[:]) > 1 {
-		port = os.Args[1]
-	} else {
-		port = "3333"
-	}
-	serve.Serve(port)
+	config.LoadConfigs()
+	ezap.Fatal(serve.Run(":8000"))
 }

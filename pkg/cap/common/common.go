@@ -7,14 +7,9 @@ import (
 	"log"
 	"os/exec"
 
-	"github.com/fimreal/go-tools/cmd"
+	caputils "github.com/fimreal/rack/pkg/cap/utils"
 	"github.com/gin-gonic/gin"
 )
-
-// healthcheck
-func Healthcheck(context *gin.Context) {
-	context.String(http.StatusOK, "ok")
-}
 
 func Hostname(context *gin.Context) {
 	c := exec.Command("hostname")
@@ -22,22 +17,22 @@ func Hostname(context *gin.Context) {
 	if err != nil {
 		log.Println(err)
 	}
-	res := cmd.CommandResult{Command: "/hostname", ReturnCode: 0, Result: strings.Trim(string(cmdResult), "\n")}
+	res := caputils.CommandResult{Command: "/hostname", ReturnCode: 0, Result: strings.Trim(string(cmdResult), "\n")}
 	context.JSON(http.StatusOK, res)
 }
 
 // 记住要限制容器内权限，同时在 nginx 反代增加简单认证保证安全
 func ShellExec(context *gin.Context) {
-	res := cmd.CommandResult{}
+	res := caputils.CommandResult{}
 	pass, ok := context.GetPostForm("pass")
 	if pass != "xm" || !ok {
-		res = cmd.CommandResult{Command: "/shell", ReturnCode: 1, Result: "出错了！缺少参数，或服务临时不可用。"}
+		res = caputils.CommandResult{Command: "/shell", ReturnCode: 1, Result: "出错了！缺少参数，或服务临时不可用。"}
 		context.JSON(http.StatusOK, res)
 		return
 	}
 	args, ok := context.GetPostForm("cmd")
 	if !ok {
-		res = cmd.CommandResult{Command: "/shell", ReturnCode: 1, Result: "出错了！请检查传入参数：" + args}
+		res = caputils.CommandResult{Command: "/shell", ReturnCode: 1, Result: "出错了！请检查传入参数：" + args}
 		context.JSON(http.StatusOK, res)
 		return
 	}
@@ -47,6 +42,6 @@ func ShellExec(context *gin.Context) {
 	if err != nil {
 		log.Println(err)
 	}
-	res = cmd.CommandResult{Command: "/hostname", ReturnCode: 0, Result: strings.Trim(string(cmdResult), "\n")}
+	res = caputils.CommandResult{Command: "/hostname", ReturnCode: 0, Result: strings.Trim(string(cmdResult), "\n")}
 	context.JSON(http.StatusOK, res)
 }

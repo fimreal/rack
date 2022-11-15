@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/fimreal/go-tools/cmd"
+	caputils "github.com/fimreal/rack/pkg/cap/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ func IfIP(context *gin.Context) {
 		log.Fatal(err)
 	}
 	var ips []string
-	res := cmd.CommandResult{}
+	res := caputils.CommandResult{}
 	for _, address := range addrs {
 		// 检查ip地址判断是否回环地址
 		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
@@ -25,15 +25,15 @@ func IfIP(context *gin.Context) {
 			}
 		}
 	}
-	res = cmd.CommandResult{Command: "getIP", ReturnCode: 0, Result: ips}
+	res = caputils.CommandResult{Command: "getIP", ReturnCode: 0, Result: ips}
 	context.JSON(http.StatusOK, res)
 }
 
 func GetIP(context *gin.Context) {
-	res := cmd.CommandResult{}
+	res := caputils.CommandResult{}
 	resp, err := http.Get("http://epurs.com/ip")
 	if err != nil {
-		res = cmd.CommandResult{Command: "/serverip", ReturnCode: 1, Result: err}
+		res = caputils.CommandResult{Command: "/serverip", ReturnCode: 1, Result: err}
 		context.JSON(http.StatusOK, res)
 		return
 	}
@@ -47,15 +47,15 @@ func GetIP(context *gin.Context) {
 		}
 		content += string(buf[:n])
 	}
-	res = cmd.CommandResult{Command: "/serverip", ReturnCode: 0, Result: strings.Replace(content, "\n", "", -1)}
+	res = caputils.CommandResult{Command: "/serverip", ReturnCode: 0, Result: strings.Replace(content, "\n", "", -1)}
 	context.JSON(http.StatusOK, res)
 }
 
 func GetIPInfo(context *gin.Context) {
-	res := cmd.CommandResult{}
+	res := caputils.CommandResult{}
 	resp, err := http.Get("http://epurs.com/ipinfo")
 	if err != nil {
-		res = cmd.CommandResult{Command: "/serverip", ReturnCode: 1, Result: err}
+		res = caputils.CommandResult{Command: "/serverip", ReturnCode: 1, Result: err}
 	}
 	defer resp.Body.Close()
 	buf := make([]byte, 4096)
@@ -67,6 +67,6 @@ func GetIPInfo(context *gin.Context) {
 		}
 		content += string(buf[:n])
 	}
-	res = cmd.CommandResult{Command: "/serverip", ReturnCode: 0, Result: content}
+	res = caputils.CommandResult{Command: "/serverip", ReturnCode: 0, Result: content}
 	context.JSON(http.StatusOK, res)
 }
