@@ -9,6 +9,7 @@ import (
 
 	caputils "github.com/fimreal/rack/pkg/cap/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/ory/viper"
 )
 
 func Hostname(context *gin.Context) {
@@ -25,7 +26,7 @@ func Hostname(context *gin.Context) {
 func ShellExec(context *gin.Context) {
 	res := caputils.CommandResult{}
 	pass, ok := context.GetPostForm("pass")
-	if pass != "xm" || !ok {
+	if pass != viper.GetString("tools.password") || !ok {
 		res = caputils.CommandResult{Command: "/shell", ReturnCode: 1, Result: "出错了！缺少参数，或服务临时不可用。"}
 		context.JSON(http.StatusOK, res)
 		return

@@ -2,10 +2,10 @@ package email
 
 import (
 	"crypto/tls"
-	"os"
 	"strconv"
 
 	"github.com/fimreal/goutils/ezap"
+	"github.com/ory/viper"
 	"gopkg.in/gomail.v2"
 )
 
@@ -17,17 +17,11 @@ type Mailer struct {
 }
 
 func NewMailer() *Mailer {
-	// return &Mailer{
-	// 	Username:       viper.GetString("username"),
-	// 	Password:       viper.GetString("password"),
-	// 	Smtpserver:     viper.GetString("smtpserver"),
-	// 	Smtpserverport: viper.GetString("smtpserverport"),
-	// }
 	return &Mailer{
-		Username:       os.Getenv("MAILUSERNAME"),
-		Password:       os.Getenv("MAILPASSWORD"),
-		SmtpServer:     os.Getenv("MAILSMTPSERVER"),
-		SmtpServerPort: os.Getenv("MAILSMTPSERVERPORT"),
+		Username:       viper.GetString("mail.username"),
+		Password:       viper.GetString("mail.password"),
+		SmtpServer:     viper.GetString("mail.smtpserver"),
+		SmtpServerPort: viper.GetString("mail.smtpserverport"),
 	}
 }
 

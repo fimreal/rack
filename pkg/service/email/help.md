@@ -5,7 +5,7 @@
 curl -XPOST 127.0.0.1:8000/s/mailto \
 -d '{
     "mailto": [
-        "limingrui@trgroup.cn"
+        "lmr@epurs.com"
     ],
     "subject": "test subject",
     "body": "这是你的测试邮件了"

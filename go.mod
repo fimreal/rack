@@ -5,8 +5,8 @@ go 1.19
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.10
 	github.com/fimreal/goutils v0.0.0-20221115064658-5155affd3f00
-	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-gonic/gin v1.8.1
+	github.com/ip2location/ip2location-go/v9 v9.5.0
 	github.com/ory/viper v1.7.5
 	github.com/spf13/pflag v1.0.5
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
@@ -15,6 +15,7 @@ require (
 require (
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/dgraph-io/ristretto v0.0.1 // indirect
+	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
