@@ -34,10 +34,10 @@ WINDOWS_ARCH_LIST = \
 	windows-armv7 \
 	windows-arm64
 
-all: linux-amd64 darwin-amd64 windows-amd64 # Most used
+all: linux-amd64 linux-armv7 darwin-amd64 windows-amd64 # Most used
 
 docker:
-    docker build -t $(APPDIR) .
+	docker build -t $(APPDIR) .
 
 docker-build:
 	$(GOBUILD) -o $(BINDIR)/$(NAME) $(APPDIR)
@@ -56,7 +56,6 @@ linux-386:
 
 linux-amd64:
 	GOARCH=amd64 GOOS=linux $(GOBUILD) -o $(BINDIR)/$(NAME)-$@ $(APPDIR)
-OBUILD) -o $(BINDIR)/$(NAME)-$@
 
 linux-amd64-v3:
 	GOARCH=amd64 GOOS=linux GOAMD64=v3 $(GOBUILD) -o $(BINDIR)/$(NAME)-$@ $(APPDIR)
