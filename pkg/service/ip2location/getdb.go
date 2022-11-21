@@ -3,8 +3,8 @@ package ip2location
 import (
 	"github.com/fimreal/goutils/ezap"
 	mfile "github.com/fimreal/goutils/file"
-	httpc "github.com/fimreal/goutils/http"
 	mzip "github.com/fimreal/goutils/zip"
+	"github.com/fimreal/rack/pkg/utils"
 	"github.com/ory/viper"
 )
 
@@ -31,7 +31,7 @@ func GetDB() {
 	ezap.Infof("开始下载数据库[%s]]，速度取决于您的网络连接速度", DB_ZIPFILE)
 	ezap.Debug("Download DB Url: ", DB_URL)
 
-	err := httpc.Download(DB_URL, DB_ZIPFILE)
+	err := utils.DownloadNotls(DB_URL, DB_ZIPFILE)
 	if err != nil {
 		ezap.Fatalf("下载数据库[%s]出错: %s", DB_ZIPFILE, err)
 	}

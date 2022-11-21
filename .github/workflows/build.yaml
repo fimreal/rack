@@ -51,4 +51,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cask:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/rack:latest
