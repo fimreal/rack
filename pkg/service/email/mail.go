@@ -21,11 +21,11 @@ func SendMail(c *gin.Context) {
 
 	ezap.Debugf("请求发送邮件, 传入收件人: %v, 发送标题: %s, 内容: %s", letter.Mailto, letter.Subject, letter.Body)
 
-	// if err := Mailto(&letter); err != nil {
-	// 	ezap.Error(err)
-	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err})
-	// 	return
-	// }
+	if err := Mailto(&letter); err != nil {
+		ezap.Error(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	}
 	ezap.Debug("邮件发送成功")
 	c.JSON(http.StatusOK, gin.H{"result": "邮件发送成功"})
 }
