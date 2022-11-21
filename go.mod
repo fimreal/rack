@@ -3,7 +3,7 @@ module github.com/fimreal/rack
 go 1.19
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.62.10
+	github.com/aliyun/alibaba-cloud-sdk-go v1.62.27
 	github.com/fimreal/goutils v0.0.0-20221115064658-5155affd3f00
 	github.com/gin-gonic/gin v1.8.1
 	github.com/ip2location/ip2location-go/v9 v9.5.0
