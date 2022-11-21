@@ -3,7 +3,7 @@ FROM golang:latest as builder
 COPY . /srv/rack
 
 RUN cd /srv/rack &&\
-    make docker-in &&\
+    make docker-build &&\
     ls -l bin
 
 
