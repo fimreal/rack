@@ -18,7 +18,7 @@ func ServiceRoutes(r *gin.RouterGroup) {
 	}
 
 	if viper.GetBool("mail") {
-		srv.POST("/mailto", email.SendMail)
+		srv.POST("/mailto", email.SendMail) // 兼容 http2mail，注意修改路径
 	}
 
 	if viper.GetBool("ip2location") {

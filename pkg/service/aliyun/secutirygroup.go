@@ -6,14 +6,14 @@ import (
 
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
 	"github.com/fimreal/goutils/ezap"
-	iptools "github.com/fimreal/goutils/net"
+	"github.com/fimreal/rack/pkg/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func Allow(c *gin.Context) {
 	// 检查传入 json 参数是否符合
 	var sgrule SGRule
-	if err := c.ShouldBindJSON(&sgrule); err != nil {
+	if err := c.ShouldBind(&sgrule); err != nil {
 		ezap.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -71,7 +71,7 @@ func (s *SGRule) authorize() error {
 // 否则通过
 func (s *SGRule) verify() bool {
 
-	if iptools.IsLanIPv4(s.IP) {
+	if utils.IsLanIPv4(s.IP) {
 		ezap.Errorf("传入 ip[%s] 为内网 ip", s.IP)
 		return false
 	}

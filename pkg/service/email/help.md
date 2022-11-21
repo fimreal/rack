@@ -3,6 +3,7 @@
 
 ```bash
 curl -XPOST 127.0.0.1:8000/s/mailto \
+-H "content-type: application/json" \
 -d '{
     "mailto": [
         "lmr@epurs.com"

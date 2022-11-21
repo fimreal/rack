@@ -36,7 +36,7 @@ func Mailto(letter *Letter) error {
 
 	m := gomail.NewMessage()
 	m.SetHeader("From", m.FormatAddress(username, "GoMail Robot"))
-	m.SetHeader("To", letter.Mailto...)
+	m.SetHeader("To", letter.Mailto)
 	m.SetHeader("Subject", letter.Subject)
 	m.SetBody("text/html", letter.Body)
 
