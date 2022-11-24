@@ -25,5 +25,6 @@ func NewClient() *ecs.Client {
 	if err != nil {
 		ezap.Fatal(err)
 	}
+	// client.SetHTTPSInsecure(true) // for testing
 	return client
 }
