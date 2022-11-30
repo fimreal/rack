@@ -55,14 +55,15 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          file: Dockerfile
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: Dockerfile-alpine-tzdata
           push: true
+          file: Dockerfile-alpine-tzdata
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:alpine
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}-alpine
