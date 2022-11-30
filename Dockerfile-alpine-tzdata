@@ -1,26 +1,22 @@
-FROM golang:alpine as builder
-
+FROM golang:latest as builder
 COPY . /srv/rack
-
 RUN cd /srv/rack &&\
     make docker-build &&\
-    ls -l bin
+    ls -l bin 
 
 # 下载证书
 FROM alpine:latest as ca
-
 RUN apk --no-cache add ca-certificates
 
 #
 FROM alpine:latest
-
 LABEL source.url="https://github.com/fimreal/rack"
+RUN apk add --no-cache tzdata &&\
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
+    echo "Asia/Shanghai" > /etc/timezone
 
 COPY --from=ca /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /srv/rack/bin/rack /rack
 
-CMD [ "/rack" ]
+ENTRYPOINT [ "/rack" ]
 
-RUN apk add --no-cache tzdata &&\
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
-    echo "Asia/Shanghai" > /etc/timezone
