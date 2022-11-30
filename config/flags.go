@@ -21,12 +21,14 @@ func setFlag() {
 	pflag.String("mail.password", "", "smtp (发件人)密码")
 	pflag.String("mail.smtpserver", "", "smtp 服务器地址")
 	pflag.String("mail.smtpserverport", "", "smtp 服务器地址")
+	pflag.Bool("mail.insecureskipverify", true, "是否跳过证书验证")
 
 	// aliyun
 	pflag.Bool("aliyun", false, "启用阿里云安全组控制")
 	pflag.String("aliyun.akid", "", "ACCESS_KEY_ID")
 	pflag.String("aliyun.aksecret", "", "ACCESS_KEY_SECRET")
 	pflag.String("aliyun.regionid", "", "REGION_ID")
+	pflag.Bool("aliyun.insecureskipverify", false, "是否跳过证书验证(容器内常遇到 https 连接证书验证失败)")
 
 	// ip2location
 	pflag.Bool("ip2location", false, "是否启用 ip2location 查询")

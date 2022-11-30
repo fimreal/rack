@@ -41,7 +41,10 @@ func Mailto(letter *Letter) error {
 	m.SetBody("text/html", letter.Body)
 
 	d := gomail.NewDialer(host, port, username, password)
-	d.TLSConfig = &tls.Config{InsecureSkipVerify: true} // 解决 x509: certificate signed by unknown authority 报错问题, 关掉 tls 认证
+
+	if viper.GetBool("mail.insecureskipverify") {
+		d.TLSConfig = &tls.Config{InsecureSkipVerify: true} // 解决 x509: certificate signed by unknown authority 报错问题, 关掉 tls 认证
+	}
 
 	return d.DialAndSend(m)
 }
