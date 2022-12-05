@@ -45,10 +45,9 @@ func (s *SGRule) authorize() error {
 	r.IpProtocol = "tcp"
 	r.Priority = "1"
 	r.Policy = "accept"
-	if s.Policy == "drop" {
+	if s.Policy == "drop" || s.Policy == "deny" {
 		r.Policy = "drop"
 	}
-	r.Policy = "accept"
 	r.NicType = "internet"
 	r.PortRange = "1/65535"
 

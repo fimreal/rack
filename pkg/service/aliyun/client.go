@@ -26,7 +26,7 @@ func NewClient() *ecs.Client {
 		ezap.Fatal(err)
 	}
 	if viper.GetBool("aliyun.insecureskipverify") {
-		client.SetHTTPSInsecure(true) // 跳过证书验证，阿里云 sdk 似乎不支持使用 /etc/ssl/certs 中 ca 配置
+		client.SetHTTPSInsecure(true) // 跳过证书验证
 	}
 	return client
 }
