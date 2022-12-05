@@ -35,6 +35,10 @@ func setFlag() {
 	pflag.String("ip2location.db", "DB11", "IP 数据库等级, 可选 DB1 DB3 DB5 DB9 DB11, 数字越大数据库内容越丰富, 相应数据库也就越大")
 	pflag.String("ip2location.token", "", "ip2location lite token")
 
+	// chatGPT
+	pflag.Bool("chatgpt", false, "是否启用 chatgpt")
+	pflag.String("chatgpt.token", "", "chatgpt token https://beta.openai.com/account/api-keys")
+
 	// load pflag into viper
 	pflag.Parse()
 	viper.BindPFlags(pflag.CommandLine)

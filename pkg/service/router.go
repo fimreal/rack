@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/fimreal/rack/pkg/service/aliyun"
+	"github.com/fimreal/rack/pkg/service/chatgpt"
 	"github.com/fimreal/rack/pkg/service/email"
 	"github.com/fimreal/rack/pkg/service/ip2location"
 	"github.com/gin-gonic/gin"
@@ -23,6 +24,10 @@ func ServiceRoutes(r *gin.RouterGroup) {
 
 	if viper.GetBool("ip2location") {
 		srv.GET("/ip/:ip", ip2location.IpQuery)
+	}
+
+	if viper.GetBool("chatgpt") {
+		srv.GET("/chatgpt", chatgpt.Ask)
 	}
 
 }
