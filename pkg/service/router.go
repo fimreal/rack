@@ -24,10 +24,12 @@ func ServiceRoutes(r *gin.RouterGroup) {
 
 	if viper.GetBool("ip2location") {
 		srv.GET("/ip/:ip", ip2location.IpQuery)
+		srv.POST("/ip/:ip", ip2location.IpQuery)
 	}
 
 	if viper.GetBool("chatgpt") {
 		srv.GET("/chatgpt", chatgpt.Ask)
+		srv.POST("/chatgpt", chatgpt.Ask)
 	}
 
 }
