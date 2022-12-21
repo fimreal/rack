@@ -6,6 +6,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.28
 	github.com/fimreal/goutils v0.0.0-20221121063615-26b18de1e613
 	github.com/gin-gonic/gin v1.8.1
+	github.com/gomarkdown/markdown v0.0.0-20221013030248-663e2500819c
 	github.com/ip2location/ip2location-go/v9 v9.5.0
 	github.com/ory/viper v1.7.5
 	github.com/spf13/pflag v1.0.5

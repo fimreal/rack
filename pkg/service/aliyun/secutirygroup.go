@@ -29,7 +29,7 @@ func Allow(c *gin.Context) {
 	err := sgrule.authorize()
 	if err != nil {
 		ezap.Error("添加安全组规则出错: ", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	ezap.Debug("成功添加安全组规则")
@@ -95,7 +95,7 @@ func (s *SGRule) verify() bool {
 		return false
 	}
 
-	ezap.Info("开始检查安全组是否存在，", s.SGID)
+	ezap.Debug("开始检查安全组是否存在，", s.SGID)
 	if len(res.SecurityGroups.SecurityGroup) == 0 {
 		ezap.Debugf("传入安全组 id: %s, 找到对应安全组 id: %+v", s.SGID, res.SecurityGroups.SecurityGroup)
 		ezap.Error(s.SGID, " is not exists ")

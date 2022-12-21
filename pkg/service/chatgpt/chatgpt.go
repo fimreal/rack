@@ -40,6 +40,10 @@ func Ask(c *gin.Context) {
 	gptsayString := gptsay.Choices[0].Text
 	gptsayString = strings.Replace(gptsayString, "\n", "", 2)
 
+	if ask.H {
+		c.Data(http.StatusOK, "text/html; charset=utf-8", md2html(gptsayString))
+		return
+	}
 	c.String(http.StatusOK, gptsayString)
 }
 

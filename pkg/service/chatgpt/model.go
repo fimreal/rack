@@ -2,6 +2,7 @@ package chatgpt
 
 type NewASk struct {
 	ASK string `json:"ask" form:"ask" validate:"required"`
+	H   bool   `json:"h" form:"h"`
 }
 
 type AskChatGPT struct {
