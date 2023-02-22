@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/fimreal/goutils/ezap"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 	"gopkg.in/gomail.v2"
 )
 

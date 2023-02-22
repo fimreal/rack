@@ -5,7 +5,7 @@ import (
 	mfile "github.com/fimreal/goutils/file"
 	mzip "github.com/fimreal/goutils/zip"
 	"github.com/fimreal/rack/pkg/utils"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
 var DB_FILENAME string

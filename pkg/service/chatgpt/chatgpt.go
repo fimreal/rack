@@ -8,7 +8,7 @@ import (
 
 	"github.com/fimreal/goutils/ezap"
 	"github.com/gin-gonic/gin"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
 var (

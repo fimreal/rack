@@ -1,0 +1,29 @@
+package common
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+)
+
+func AddRoutes(r *gin.RouterGroup) {
+	if !viper.GetBool("common") {
+		return
+	}
+
+	// list api
+	r.GET("/help", Help)
+
+	// client 相关
+	r.GET("/ip", ClientIP)
+	r.GET("/ipinfo", ClientIPInfo)
+
+	// host 相关
+	r.GET("/hostip", HostIP)
+	r.GET("/hostname", Hostname)
+
+	// 高级请求
+	r.GET("/ipinfo/:ip", GetIPInfo)
+	r.GET("/dns/:host", GetDNSRecord)
+	r.GET("/code", SixNumber)
+	r.GET("/genpass", GenRandomPassword)
+}

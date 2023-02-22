@@ -2,14 +2,17 @@ package serve
 
 import (
 	"github.com/fimreal/goutils/ezap"
-	"github.com/fimreal/rack/pkg/cap"
+	"github.com/fimreal/rack/pkg/common"
+	"github.com/fimreal/rack/pkg/config"
 	"github.com/fimreal/rack/pkg/service"
 	"github.com/gin-gonic/gin"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
 // Run() 启动 web api 服务，传入 address 可以为端口 :8000
-func Run(address string) error {
+func Run() error {
+	config.LoadConfigs()
+	port := ":" + viper.GetString("port")
 	if viper.GetBool("debug") {
 		ezap.SetLevel("debug")
 	} else {
@@ -17,11 +20,15 @@ func Run(address string) error {
 	}
 
 	r := gin.Default()
-	apiroot := r.Group("/")
+	r.NoRoute(HelloWorld) // 404 => hello world
 
-	cap.Healthcheck(apiroot)
-	cap.CapRoutes(apiroot)
-	service.ServiceRoutes(apiroot)
+	apiroot := r.Group("/") // 装载路由
+	// 默认装载 hs 和 common
+	Healthcheck(apiroot)
+	common.AddRoutes(apiroot)
+	// 特殊服务
+	service.AddRoutes(apiroot)
 
-	return r.Run(address)
+	ezap.Infof("Listrning to %s", port)
+	return r.Run(port)
 }

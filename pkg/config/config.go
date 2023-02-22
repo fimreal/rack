@@ -3,7 +3,7 @@ package config
 import (
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/service/ip2location"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
 func LoadConfigs() {

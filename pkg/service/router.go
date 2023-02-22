@@ -6,10 +6,10 @@ import (
 	"github.com/fimreal/rack/pkg/service/email"
 	"github.com/fimreal/rack/pkg/service/ip2location"
 	"github.com/gin-gonic/gin"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
-func ServiceRoutes(r *gin.RouterGroup) {
+func AddRoutes(r *gin.RouterGroup) {
 	serviceBasePath := "/s"
 	srv := r.Group(serviceBasePath)
 

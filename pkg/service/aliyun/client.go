@@ -3,7 +3,7 @@ package aliyun
 import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
 	"github.com/fimreal/goutils/ezap"
-	"github.com/ory/viper"
+	"github.com/spf13/viper"
 )
 
 type AliyunAccessKey struct {
