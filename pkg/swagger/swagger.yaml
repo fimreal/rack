@@ -1,4 +1,51 @@
+basePath: /
 info:
   contact: {}
-paths: {}
+  title: rack
+  version: 0.1.
+paths:
+  /hc:
+    get:
+      description: healthcheck
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 健康检查
+  /health:
+    get:
+      description: healthcheck
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 健康检查
+  /ip:
+    get:
+      description: Return client ip
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Return client ip
+  /ipinfo:
+    get:
+      description: Describe client ip
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: json
+      summary: Describe client ip
 swagger: "2.0"

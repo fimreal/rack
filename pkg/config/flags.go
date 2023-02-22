@@ -10,6 +10,8 @@ func setFlag() {
 	pflag.StringP("port", "p", "5000", "指定启动端口")
 	pflag.StringP("workdir", "w", "./", "设置工作目录，用于存放数据库文件")
 	pflag.BoolP("debug", "d", false, "debug mode")
+	// swagger
+	pflag.Bool("swagger", false, "swagger docs")
 
 	// common
 	pflag.Bool("common", true, "通用工具包")

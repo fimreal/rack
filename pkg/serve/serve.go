@@ -5,6 +5,7 @@ import (
 	"github.com/fimreal/rack/pkg/common"
 	"github.com/fimreal/rack/pkg/config"
 	"github.com/fimreal/rack/pkg/service"
+	"github.com/fimreal/rack/pkg/swagger"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -23,11 +24,14 @@ func Run() error {
 	r.NoRoute(HelloWorld) // 404 => hello world
 
 	apiroot := r.Group("/") // 装载路由
-	// 默认装载 hs 和 common
+	// 健康检查
 	Healthcheck(apiroot)
+	// 基础服务
 	common.AddRoutes(apiroot)
 	// 特殊服务
 	service.AddRoutes(apiroot)
+	// swagger
+	swagger.AddRoutes(apiroot)
 
 	ezap.Infof("Listrning to %s", port)
 	return r.Run(port)

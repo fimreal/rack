@@ -10,9 +10,6 @@ func AddRoutes(r *gin.RouterGroup) {
 		return
 	}
 
-	// list api
-	r.GET("/help", Help)
-
 	// client 相关
 	r.GET("/ip", ClientIP)
 	r.GET("/ipinfo", ClientIPInfo)

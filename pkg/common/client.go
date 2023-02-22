@@ -9,11 +9,21 @@ import (
 )
 
 // return client ip
+// @Summary     Return client ip
+// @Description Return client ip
+// @Produce     plain
+// @Success     200 {string} 1.1.1.1
+// @Router      /ip [get]
 func ClientIP(c *gin.Context) {
 	c.String(http.StatusOK, c.ClientIP())
 }
 
 // 需要访问互联网，使用 ip2location 更好
+// @Summary     Describe client ip
+// @Description Describe client ip，需要访问互联网，使用 ip2location 更好
+// @Produce     json
+// @Success     200 {object} ipinfo
+// @Router      /ipinfo [get]
 func ClientIPInfo(c *gin.Context) {
 	remote, _ := url.Parse("http://ip-api.com/json/?lang=zh-CN")
 	proxy := httputil.NewSingleHostReverseProxy(remote)

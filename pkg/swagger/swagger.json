@@ -1,7 +1,79 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "title": "rack",
+        "contact": {},
+        "version": "0.1."
     },
-    "paths": {}
+    "basePath": "/",
+    "paths": {
+        "/hc": {
+            "get": {
+                "description": "healthcheck",
+                "produces": [
+                    "text/plain"
+                ],
+                "summary": "健康检查",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "healthcheck",
+                "produces": [
+                    "text/plain"
+                ],
+                "summary": "健康检查",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/ip": {
+            "get": {
+                "description": "Return client ip",
+                "produces": [
+                    "text/plain"
+                ],
+                "summary": "Return client ip",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/ipinfo": {
+            "get": {
+                "description": "Describe client ip",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Describe client ip",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
