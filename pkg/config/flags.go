@@ -16,10 +16,6 @@ func setFlag() {
 	// common
 	pflag.Bool("common", true, "通用工具包")
 
-	// tools
-	pflag.Bool("tools", false, "启用本地工具包")
-	pflag.String("tools.password", "", "本地工具包密码，用于部分命令执行验证")
-
 	// mail
 	pflag.Bool("mail", false, "启用 http2mail 服务")
 	pflag.String("mail.username", "", "smtp (发件人)用户名")

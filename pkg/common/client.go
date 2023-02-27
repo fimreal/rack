@@ -32,7 +32,7 @@ func ClientIPInfo(c *gin.Context) {
 		req.URL.Scheme = remote.Scheme
 		req.Header = c.Request.Header
 		req.URL.Host = remote.Host
-		req.URL.Path = remote.Path + "/" + c.RemoteIP()
+		req.URL.Path = remote.Path + "/" + c.ClientIP()
 	}
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
