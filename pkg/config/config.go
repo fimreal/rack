@@ -1,6 +1,8 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/service/ip2location"
 	"github.com/spf13/viper"
@@ -9,6 +11,8 @@ import (
 func LoadConfigs() {
 	ezap.SetLogTime("")
 	// LoadConfigFile()  // 加载配置文件
+	// shell 不允许带'.'的环境变量，绑定是把'.'取消掉
+	viper.SetEnvKeyReplacer(strings.NewReplacer(`.`, ``))
 	viper.AutomaticEnv() // 加载环境变量
 	setFlag()            // 解析传入参数
 
