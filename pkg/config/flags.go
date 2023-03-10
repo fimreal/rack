@@ -1,6 +1,8 @@
 package config
 
 import (
+	"errors"
+
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 )
@@ -40,6 +42,7 @@ func setFlag() {
 	pflag.Bool("chatgpt", false, "是否启用 chatgpt")
 	pflag.String("chatgpt.token", "", "chatgpt token https://beta.openai.com/account/api-keys")
 
+	pflag.ErrHelp = errors.New("")
 	// load pflag into viper
 	pflag.Parse()
 	viper.BindPFlags(pflag.CommandLine)
