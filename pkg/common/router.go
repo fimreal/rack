@@ -21,6 +21,7 @@ func AddRoutes(r *gin.RouterGroup) {
 	// 高级请求
 	r.GET("/ipinfo/:ip", GetIPInfo)
 	r.GET("/dns/:host", GetDNSRecord)
+	r.GET("/whois/:domain", Whois)
 	r.GET("/code", SixNumber)
 	r.GET("/genpass", GenRandomPassword)
 }
