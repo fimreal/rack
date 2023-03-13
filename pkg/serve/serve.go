@@ -20,7 +20,13 @@ func Run() error {
 		gin.SetMode(gin.ReleaseMode) // Switch to "release" mode in production.
 	}
 
-	r := gin.Default()
+	// r := gin.Default()
+	r := gin.New()
+	r.Use(gin.Recovery(), gin.LoggerWithConfig(
+		gin.LoggerConfig{
+			SkipPaths: []string{"/health", "/metrics", "/hc", "/"},
+		},
+	))
 	r.NoRoute(HelloWorld) // 404 => hello world
 
 	apiroot := r.Group("/") // 装载路由

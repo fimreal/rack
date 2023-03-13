@@ -13,6 +13,7 @@ import (
 // @Router      /health [get]
 // @Router      /hc [get]
 func Healthcheck(r *gin.RouterGroup) {
-	r.GET("/hc", func(ctx *gin.Context) { ctx.String(http.StatusOK, "ok") })
-	r.GET("/health", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, gin.H{"status": "ok"}) })
+	r.Any("/", func(ctx *gin.Context) { ctx.Status(200) })
+	r.Any("/hc", func(ctx *gin.Context) { ctx.String(http.StatusOK, "ok") })
+	r.Any("/health", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, gin.H{"status": "ok"}) })
 }
