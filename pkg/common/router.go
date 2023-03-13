@@ -18,10 +18,14 @@ func AddRoutes(r *gin.RouterGroup) {
 	r.GET("/hostip", HostIP)
 	r.GET("/hostname", Hostname)
 
-	// 高级请求
+	// 对外请求
 	r.GET("/ipinfo/:ip", GetIPInfo)
 	r.GET("/dns/:host", GetDNSRecord)
 	r.GET("/whois/:domain", Whois)
+
+	// 小函数
 	r.GET("/code", SixNumber)
 	r.GET("/genpass", GenRandomPassword)
+	r.GET("/time", TimeStamp)
+	r.GET("/time/:ts", TimeStampTrans)
 }
