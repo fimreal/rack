@@ -14,6 +14,7 @@ import (
 )
 
 // 需要访问互联网，使用 ip2location 更好
+// gin 反代
 func GetIPInfo(c *gin.Context) {
 	remote, _ := url.Parse("http://ip-api.com/json/?lang=zh-CN")
 	proxy := httputil.NewSingleHostReverseProxy(remote)
@@ -29,6 +30,7 @@ func GetIPInfo(c *gin.Context) {
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
 
+// golang 解析 dns
 func GetDNSRecord(c *gin.Context) {
 	host := c.Param("host")
 	cname, _ := net.LookupCNAME(host)
@@ -48,6 +50,7 @@ func GetDNSRecord(c *gin.Context) {
 	c.String(http.StatusOK, strings.Join(ips, " "))
 }
 
+// golang 建立 tcp 连接，指定发送数据内容
 func Whois(c *gin.Context) {
 	var (
 		domain       = c.Param("domain")
