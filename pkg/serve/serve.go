@@ -4,6 +4,7 @@ import (
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/common"
 	"github.com/fimreal/rack/pkg/config"
+	"github.com/fimreal/rack/pkg/scripts"
 	"github.com/fimreal/rack/pkg/service"
 	"github.com/fimreal/rack/pkg/swagger"
 	"github.com/gin-gonic/gin"
@@ -35,6 +36,7 @@ func Run() error {
 	// 基础服务
 	common.AddRoutes(apiroot)
 	// 特殊服务
+	scripts.AddRoutes(apiroot)
 	service.AddRoutes(apiroot)
 	// swagger
 	swagger.AddRoutes(apiroot)

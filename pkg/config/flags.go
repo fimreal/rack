@@ -10,7 +10,7 @@ import (
 func setFlag() {
 	// server
 	pflag.StringP("port", "p", "5000", "指定启动端口")
-	pflag.StringP("workdir", "w", "./", "设置工作目录，用于存放数据库文件")
+	pflag.StringP("workdir", "w", "./", "设置工作目录，用于存放数据库文件等")
 	pflag.BoolP("debug", "d", false, "debug mode")
 	// swagger
 	pflag.Bool("swagger", false, "swagger docs")
@@ -31,7 +31,7 @@ func setFlag() {
 	pflag.String("aliyun.akid", "", "ACCESS_KEY_ID")
 	pflag.String("aliyun.aksecret", "", "ACCESS_KEY_SECRET")
 	pflag.String("aliyun.regionid", "", "REGION_ID")
-	pflag.Bool("aliyun.insecureskipverify", false, "是否跳过证书验证(容器内常遇到 https 连接证书验证失败)")
+	pflag.Bool("aliyun.insecureskipverify", false, "是否跳过证书验证(小容器没有证书会遇到 https 连接证书验证失败)")
 
 	// ip2location
 	pflag.Bool("ip2location", false, "是否启用 ip2location 查询")
@@ -41,6 +41,9 @@ func setFlag() {
 	// chatGPT
 	pflag.Bool("chatgpt", false, "是否启用 chatgpt")
 	pflag.String("chatgpt.token", "", "chatgpt token https://beta.openai.com/account/api-keys")
+
+	// chatGPT
+	pflag.Bool("scripts", false, "是否启用常用安装脚本下载")
 
 	pflag.ErrHelp = errors.New("")
 	// load pflag into viper
