@@ -18,6 +18,9 @@ func setFlag() {
 	// common
 	pflag.Bool("common", true, "通用工具包")
 
+	// docker
+	pflag.Bool("docker", true, "dockerhub 镜像查询")
+
 	// mail
 	pflag.Bool("mail", false, "启用 http2mail 服务")
 	pflag.String("mail.username", "", "smtp (发件人)用户名")

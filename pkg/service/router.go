@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/fimreal/rack/pkg/service/aliyun"
 	"github.com/fimreal/rack/pkg/service/chatgpt"
+	"github.com/fimreal/rack/pkg/service/dockerhub"
 	"github.com/fimreal/rack/pkg/service/email"
 	"github.com/fimreal/rack/pkg/service/ip2location"
 	"github.com/gin-gonic/gin"
@@ -32,4 +33,7 @@ func AddRoutes(r *gin.RouterGroup) {
 		srv.POST("/chatgpt", chatgpt.Ask)
 	}
 
+	if viper.GetBool("docker") {
+		srv.GET("/docker.io/:namespace/:repository/*result", dockerhub.ListTags)
+	}
 }
