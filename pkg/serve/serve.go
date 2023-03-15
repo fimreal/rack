@@ -25,7 +25,7 @@ func Run() error {
 	r := gin.New()
 	r.Use(gin.Recovery(), gin.LoggerWithConfig(
 		gin.LoggerConfig{
-			SkipPaths: []string{"/health", "/metrics", "/hc", "/"},
+			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
 	r.NoRoute(HelloWorld) // 404 => hello world
