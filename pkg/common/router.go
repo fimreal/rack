@@ -23,6 +23,13 @@ func AddRoutes(r *gin.RouterGroup) {
 	r.GET("/dns/:host", GetDNSRecord)
 	r.GET("/whois/:domain", Whois)
 
+	// ip tools
+	r.GET("/ip2dec/:ip", IP2Dec)
+	r.GET("/dec2ip/:ip", Dec2IP)
+	r.GET("/cidr2ip/:ip/:cidr", CIDR2IP)
+	r.GET("/ip2cidr/:ipfrom/:ipto", IP2CIDR)
+	r.GET("/pipv6/:ip", ParseIPv6)
+
 	// 小函数
 	r.GET("/code", SixNumber)
 	r.GET("/genpass", GenRandomPassword)
