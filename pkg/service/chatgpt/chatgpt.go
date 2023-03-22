@@ -12,7 +12,8 @@ import (
 )
 
 var (
-	openapi = "https://api.openai.com/v1/completions"
+	// openapi = "https://api.openai.com/v1/completions"
+	openapi = viper.GetString("chatgpt.api")
 	headers = map[string]string{
 		"Content-Type":  "application/json",
 		"Authorization": "",

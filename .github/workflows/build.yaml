@@ -62,7 +62,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}
-      - name: Build and push
+      - name: Build and push from alpine
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64

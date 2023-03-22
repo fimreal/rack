@@ -43,9 +43,10 @@ func setFlag() {
 
 	// chatGPT
 	pflag.Bool("chatgpt", false, "是否启用 chatgpt")
+	pflag.String("chatgpt.api", "https://api.openai.com/v1/completions", "chatgpt API 地址，方便添加个人代理")
 	pflag.String("chatgpt.token", "", "chatgpt token https://beta.openai.com/account/api-keys")
 
-	// chatGPT
+	// scripts
 	pflag.Bool("scripts", false, "是否启用常用安装脚本下载")
 
 	pflag.ErrHelp = errors.New("")

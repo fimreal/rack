@@ -6,6 +6,7 @@ import (
 	"github.com/fimreal/rack/pkg/config"
 	"github.com/fimreal/rack/pkg/scripts"
 	"github.com/fimreal/rack/pkg/service"
+	"github.com/fimreal/rack/pkg/static"
 	"github.com/fimreal/rack/pkg/swagger"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -35,8 +36,10 @@ func Run() error {
 	Healthcheck(apiroot)
 	// 基础服务
 	common.AddRoutes(apiroot)
-	// 特殊服务
+	// 静态页面
 	scripts.AddRoutes(apiroot)
+	static.AddRoutes(apiroot)
+	// 特殊服务
 	service.AddRoutes(apiroot)
 	// swagger
 	swagger.AddRoutes(apiroot)
