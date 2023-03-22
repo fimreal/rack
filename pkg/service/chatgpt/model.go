@@ -15,11 +15,18 @@ type AskChatGPT struct {
 	PresencePenalty  int     `json:"presence_penalty"`
 }
 
+type AskChatGPT35 struct {
+	Model    string `json:"model"`
+	Messages []struct {
+		Role    string `json:"role"`
+		Content string `json:"content"`
+	} `json:"messages"`
+}
+
 type ChatGPTSay struct {
 	ID      string `json:"id"`
 	Object  string `json:"object"`
 	Created int    `json:"created"`
-	Model   string `json:"model"`
 	Choices []struct {
 		Text         string      `json:"text"`
 		Index        int         `json:"index"`

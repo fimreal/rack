@@ -1,32 +1,22 @@
 package chatgpt
 
 import (
-	"encoding/json"
-	"io"
+	"context"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/fimreal/goutils/ezap"
 	"github.com/gin-gonic/gin"
+	"github.com/sashabaranov/go-openai"
 	"github.com/spf13/viper"
 )
 
-var (
-	// openapi = "https://api.openai.com/v1/completions"
-	openapi = viper.GetString("chatgpt.api")
-	headers = map[string]string{
-		"Content-Type":  "application/json",
-		"Authorization": "",
-	}
-)
-
 func Ask(c *gin.Context) {
-	headers["Authorization"] = "Bearer " + viper.GetString("chatgpt.token")
-	ezap.Debug(headers["Authorization"])
 
 	var ask NewASk
 	if err := c.ShouldBind(&ask); err != nil {
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -34,52 +24,71 @@ func Ask(c *gin.Context) {
 	ezap.Debugf("ask: %s", ask.ASK)
 	gptsay, err := hiGPT(ask.ASK)
 	if err != nil {
-		ezap.Error(err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		ezap.Error(err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	gptsayString := gptsay.Choices[0].Text
-	gptsayString = strings.Replace(gptsayString, "\n", "", 2)
+
+	gptsay = strings.Replace(gptsay, "\n", "", 2)
 
 	if ask.H {
-		c.Data(http.StatusOK, "text/html; charset=utf-8", md2html(gptsayString))
+		c.Data(http.StatusOK, "text/html; charset=utf-8", md2html(gptsay))
 		return
 	}
-	c.String(http.StatusOK, gptsayString)
+	c.String(http.StatusOK, gptsay)
 }
 
-func hiGPT(askStr string) (*ChatGPTSay, error) {
+func hiGPT(askStr string) (string, error) {
+	openaiToken := viper.GetString("chatgpt.token")
+	customApiUrl := viper.GetString("chatgpt.api")
+	customProxyUrl := viper.GetString("chatgpt.proxyurl")
 
-	postDataStruct := &AskChatGPT{
-		Model:            "text-davinci-003",
-		Prompt:           askStr,
-		Temperature:      0.7,
-		MaxTokens:        1024,
-		TopP:             1,
-		FrequencyPenalty: 0,
-		PresencePenalty:  0,
-	}
-	postDataByte, err := json.Marshal(postDataStruct)
+	// 创建默认配置
+	config := openai.DefaultConfig(openaiToken)
+
+	// 修改 API 地址
+	apiUrl, err := url.Parse(customApiUrl)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	ezap.Debug("req: ", string(postDataByte))
-	resp, err := HttpPost(openapi, string(postDataByte), headers)
-	if err != nil {
-		return nil, err
+	baseUrl, _ := url.Parse(config.BaseURL)
+	config.BaseURL = strings.Replace(config.BaseURL, baseUrl.Host, apiUrl.Host, 1)
+	ezap.Debug("chatgpt API: " + config.BaseURL)
+
+	// 添加代理地址
+	if customProxyUrl != "" {
+		proxyUrl, err := url.Parse(customProxyUrl)
+		if err != nil {
+			return "", err
+		}
+		config.HTTPClient = &http.Client{
+			Transport: &http.Transport{
+				Proxy: http.ProxyURL(proxyUrl),
+			},
+		}
+		ezap.Debug("chatgpt API with proxy: " + customProxyUrl)
 	}
 
-	defer resp.Body.Close()
-	body, err := io.ReadAll(resp.Body)
+	// 创建连接配置
+	c := openai.NewClientWithConfig(config)
+
+	req := openai.ChatCompletionRequest{
+		Model: openai.GPT3Dot5Turbo,
+		Messages: []openai.ChatCompletionMessage{
+			{
+				Role: openai.ChatMessageRoleUser,
+				// 这里输入对话内容
+				Content: askStr,
+			},
+		}}
+
+	resp, err := c.CreateChatCompletion(
+		context.Background(),
+		req,
+	)
 	if err != nil {
-		return nil, err
-	}
-	gptsay := &ChatGPTSay{}
-	err = json.Unmarshal(body, &gptsay)
-	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	ezap.Debug("GPT say: ", string(body))
-	return gptsay, err
+	return resp.Choices[0].Message.Content, nil
 }
