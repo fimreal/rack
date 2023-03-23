@@ -30,7 +30,7 @@ func Query(ip string) (map[string]interface{}, error) {
 
 	db, err := ip2location.OpenDB(DB_FILENAME)
 	if err != nil {
-		fmt.Print(err)
+		ezap.Error(err.Error())
 		return nil, err
 	}
 	defer db.Close()

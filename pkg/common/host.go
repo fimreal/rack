@@ -14,7 +14,7 @@ func Hostname(c *gin.Context) {
 	hostname, err := os.Hostname()
 	if err != nil {
 		c.String(500, hostname)
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		return
 	}
 	c.String(http.StatusOK, hostname)
@@ -24,7 +24,7 @@ func HostIP(c *gin.Context) {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		c.String(500, "")
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		return
 	}
 	var ips []string

@@ -14,7 +14,7 @@ func Allow(c *gin.Context) {
 	// 检查传入 json 参数是否符合
 	var sgrule SGRule
 	if err := c.ShouldBind(&sgrule); err != nil {
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -84,14 +84,14 @@ func (s *SGRule) verify() bool {
 
 	resJSON, err := c.DescribeSecurityGroups(r)
 	if err != nil {
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		return false
 	}
 	// 解析返回数据
 	res := &ecs.DescribeSecurityGroupsResponse{}
 	err = json.Unmarshal(resJSON.GetHttpContentBytes(), res)
 	if err != nil {
-		ezap.Error(err)
+		ezap.Error(err.Error())
 		return false
 	}
 

@@ -45,7 +45,7 @@ package config
 // 	if err := viper.ReadInConfig(); err != nil {
 // 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 // 			// 如果是因为找不到文件，则忽略该错误
-// 			ezap.Warn(err)
+// 			ezap.Warn(err.error())
 // 		} else {
 // 			ezap.Fatalf("Loading config file failed: %v\n", err)
 // 		}

@@ -26,7 +26,7 @@ func GetIPInfo(c *gin.Context) {
 		req.URL.Path = remote.Path + "/" + c.Param("ip")
 		req.URL.RawQuery = remote.RawQuery
 	}
-	ezap.Debugf("%v+", proxy.Director)
+	ezap.Debugf("%+v", proxy.Director)
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
 

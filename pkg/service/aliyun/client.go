@@ -23,7 +23,7 @@ func NewClient() *ecs.Client {
 	ezap.Debugf("获取 阿里云 ecs 连接配置，ACCESS_KEY_ID: %s，ACCESS_KEY_SECRET: %s，REGION_ID: %s", ak.ACCESS_KEY_ID, ak.ACCESS_KEY_SECRET, ak.REGION_ID)
 	client, err := ecs.NewClientWithAccessKey(ak.REGION_ID, ak.ACCESS_KEY_ID, ak.ACCESS_KEY_SECRET)
 	if err != nil {
-		ezap.Fatal(err)
+		ezap.Fatal(err.Error())
 	}
 	if viper.GetBool("aliyun.insecureskipverify") {
 		client.SetHTTPSInsecure(true) // 跳过证书验证

@@ -43,7 +43,7 @@ func setFlag() {
 
 	// chatGPT
 	pflag.Bool("chatgpt", false, "是否启用 chatgpt")
-	pflag.String("chatgpt.api", "api.openai.com", "chatgpt API 地址，方便添加个人 api 代理")
+	pflag.String("chatgpt.api", "https://api.openai.com", "chatgpt API 地址，方便添加个人 api 代理")
 	pflag.String("chatgpt.proxyurl", "", "http proxy 地址，方便添加代理")
 	pflag.String("chatgpt.token", "", "chatgpt token https://beta.openai.com/account/api-keys")
 
