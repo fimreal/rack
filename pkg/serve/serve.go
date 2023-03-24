@@ -29,11 +29,11 @@ func Run() error {
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
-	r.NoRoute(HelloWorld) // 404 => hello world
-
+	r.NoRoute(HelloWorld)   // 404 => hello world
 	apiroot := r.Group("/") // 装载路由
-	// 健康检查
 	Healthcheck(apiroot)
+	Robots(apiroot) // seo
+
 	// 基础服务
 	common.AddRoutes(apiroot)
 	// 静态页面
