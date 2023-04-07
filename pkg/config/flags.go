@@ -16,10 +16,13 @@ func setFlag() {
 	pflag.Bool("swagger", false, "swagger docs")
 
 	// common
-	pflag.Bool("common", true, "通用工具包")
+	pflag.Bool("common", false, "通用工具包")
 
 	// docker
-	pflag.Bool("docker", true, "dockerhub 镜像查询")
+	pflag.Bool("docker", false, "dockerhub 镜像查询")
+
+	// fileserver
+	pflag.Bool("fileserver", false, "启用文件上传下载服务")
 
 	// mail
 	pflag.Bool("mail", false, "启用 http2mail 服务")
@@ -49,6 +52,11 @@ func setFlag() {
 
 	// scripts
 	pflag.Bool("scripts", false, "是否启用常用安装脚本下载")
+
+	// ngrok
+	pflag.Bool("ngrok", false, "是否启用 ngrok 转发")
+	pflag.String("ngrok.token", "", "ngrok auth token, find in https://dashboard.ngrok.com/get-started/your-authtoken")
+	pflag.String("ngrok.domain", "", "custom domain, eg. my-domain.ngrok.io")
 
 	pflag.ErrHelp = errors.New("")
 	// load pflag into viper

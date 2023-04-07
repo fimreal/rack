@@ -11,6 +11,6 @@ import (
 // @Produce     plain
 // @Success     200 {string} string "User-agent: *\nDisallow: /"
 // @Router      /robots.txt [get]
-func Robots(r *gin.RouterGroup) {
+func disallowRobots(r *gin.Engine) {
 	r.GET("/robots.txt", func(ctx *gin.Context) { ctx.String(http.StatusOK, "User-agent: *\nDisallow: /") })
 }

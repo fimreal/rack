@@ -1,4 +1,4 @@
-package serve
+package common
 
 import (
 	"net/http"
@@ -6,6 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HelloWorld(c *gin.Context) {
+func helloWorld(c *gin.Context) {
 	c.String(http.StatusNotFound, "Hey, world!\n")
 }

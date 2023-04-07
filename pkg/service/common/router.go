@@ -1,14 +1,13 @@
 package common
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
-func AddRoutes(r *gin.RouterGroup) {
-	if !viper.GetBool("common") {
-		return
-	}
+func AddRoutes(r *gin.Engine) {
+	r.NoRoute(helloWorld) // 404 => hello world
 
 	// client 相关
 	r.GET("/ip", ClientIP)
@@ -29,10 +28,34 @@ func AddRoutes(r *gin.RouterGroup) {
 	r.GET("/cidr2ip/:ip/:cidr", CIDR2IP)
 	r.GET("/ip2cidr/:ipfrom/:ipto", IP2CIDR)
 	r.GET("/pipv6/:ip", ParseIPv6)
+	r.GET("/pip/:ip", IsPrivateIP)
+	r.GET("/rip/:ip", IsReservedIP)
 
 	// 小函数
 	r.GET("/code", SixNumber)
 	r.GET("/genpass", GenRandomPassword)
 	r.GET("/time", TimeStamp)
 	r.GET("/time/:ts", TimeStampTrans)
+
+	r.GET("/help", func(ctx *gin.Context) {
+		ctx.String(http.StatusOK, `/ip
+/ipinfo
+/hostip
+/hostname
+/ipinfo/:ip
+/dns/:host
+/whois/:domain
+/ip2dec/:ip
+/dec2ip/:ip
+/cidr2ip/:ip/:cidr
+/ip2cidr/:ipfrom/:ipto
+/pipv6/:ip
+/pip/:ip
+/rip/:ip
+/code
+/genpass
+/time
+/time/:ts
+`)
+	})
 }

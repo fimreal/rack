@@ -5,6 +5,7 @@ import (
 
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/service/ip2location"
+	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
@@ -15,6 +16,12 @@ func LoadConfigs() {
 	viper.SetEnvKeyReplacer(strings.NewReplacer(`.`, ``))
 	viper.AutomaticEnv() // 加载环境变量
 	setFlag()            // 解析传入参数
+
+	if viper.GetBool("debug") {
+		ezap.SetLevel("debug")
+	} else {
+		gin.SetMode(gin.ReleaseMode) // Switch to "release" mode in production.
+	}
 
 	if viper.GetBool("ip2location") {
 		ip2location.GetDB()

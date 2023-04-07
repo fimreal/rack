@@ -1,20 +1,36 @@
 package service
 
 import (
+	"github.com/fimreal/rack/pkg/components/swagger"
 	"github.com/fimreal/rack/pkg/service/aliyun"
 	"github.com/fimreal/rack/pkg/service/chatgpt"
+	"github.com/fimreal/rack/pkg/service/common"
 	"github.com/fimreal/rack/pkg/service/dockerhub"
 	"github.com/fimreal/rack/pkg/service/email"
+	"github.com/fimreal/rack/pkg/service/fileserver"
 	"github.com/fimreal/rack/pkg/service/ip2location"
+	"github.com/fimreal/rack/pkg/service/scripts"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
-func AddRoutes(r *gin.RouterGroup) {
+func AddRoutes(r *gin.Engine) {
+	if viper.GetBool("common") {
+		common.AddRoutes(r)
+	}
+	if viper.GetBool("scripts") {
+		scripts.AddRoutes(r)
+	}
+	if viper.GetBool("swagger") {
+		swagger.AddRoutes(r)
+	}
+	if viper.GetBool("docker") {
+		r.GET("/docker.io/:namespace/:repository/*result", dockerhub.ListTags)
+	}
+
 	serviceBasePath := "/s"
 	srv := r.Group(serviceBasePath)
 
-	// 阿里云
 	if viper.GetBool("aliyun") {
 		srv.POST("/addsgrule", aliyun.Allow)
 	}
@@ -33,7 +49,8 @@ func AddRoutes(r *gin.RouterGroup) {
 		srv.POST("/chatgpt", chatgpt.Ask)
 	}
 
-	if viper.GetBool("docker") {
-		srv.GET("/docker.io/:namespace/:repository/*result", dockerhub.ListTags)
-	}
+}
+
+func RunFileserver(r *gin.Engine) {
+	fileserver.LoadRoute(r)
 }

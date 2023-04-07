@@ -2,6 +2,7 @@ package common
 
 import (
 	"math/big"
+	"net"
 	"net/http"
 	"strings"
 
@@ -89,4 +90,47 @@ func ParseIPv6(c *gin.Context) {
 	}
 	eip, _ := t.ExpandIPv6(ip)
 	c.String(http.StatusOK, cip+" "+eip)
+}
+
+// 判断是否为私网 IP
+func IsPrivateIP(c *gin.Context) {
+	ip := net.ParseIP(c.Param("ip"))
+	if ip != nil && ip.IsPrivate() {
+		c.String(http.StatusOK, "true")
+		return
+	}
+	c.String(http.StatusOK, "false")
+}
+
+// 判断是否为保留网络地址
+// https://en.wikipedia.org/wiki/Reserved_IP_addresses
+func IsReservedIP(c *gin.Context) {
+	ip := net.ParseIP(c.Param("ip"))
+	revNet := []string{
+		"0.0.0.0/8",
+		"10.0.0.0/8",
+		"100.64.0.0/10",
+		"127.0.0.0/8",
+		"169.254.0.0/16",
+		"172.16.0.0/12",
+		"192.0.0.0/24",
+		"192.0.2.0/24",
+		"192.88.99.0/24",
+		"192.168.0.0/16",
+		"198.18.0.0/15",
+		"198.51.100.0/24",
+		"203.0.113.0/24",
+		"224.0.0.0/4",
+		"240.0.0.0/4",
+		"255.255.255.255/32",
+	}
+
+	for _, cidr := range revNet {
+		_, ipNet, _ := net.ParseCIDR(cidr)
+		if ipNet.Contains(ip) {
+			c.String(http.StatusOK, "true")
+			return
+		}
+	}
+	c.String(http.StatusOK, "false")
 }
