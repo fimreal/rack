@@ -192,8 +192,7 @@ export _PROXY_PS1_ORI=$PS1
 function proxy_on() {
     port=$1
     export no_proxy="localhost,127.0.0.1,localaddress,.localdomaiin.com"
-    # export http_proxy="http://127.0.0.1:${port:-1080}"
-    export http_proxy="http://hproxy.epurs.com:6789"
+    export http_proxy="http://127.0.0.1:${port:-1080}"
     export https_proxy=$http_proxy
     export PS1="\[\e[36;1m\](proxy on)\[\e[35;0m\]$_PROXY_PS1_ORI"
     echo "已开启代理 $http_proxy $(timeout 3 curl -s epurs.com/ipinfo | jq -r '. | .query + " " + .country')"
@@ -204,6 +203,10 @@ function proxy_off() {
     unset no_proxy
     export PS1=$_PROXY_PS1_ORI
     echo "已关闭代理"
+}
+
+function with_proxy() {
+    no_proxy="localhost,127.0.0.1,localaddress,.localdomaiin.com" https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890  "$@"
 }
 
 # Get my ip

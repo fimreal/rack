@@ -1,0 +1,22 @@
+#!/bin/env sh
+
+case "$1" in
+	aliyun)
+		DEBIAN_REPO="mirrors.aliyun.com"
+		;;
+	ustc)
+		DEBIAN_REPO="mirrors.ustc.edu.cn"
+		;;
+	tuna)
+		DEBIAN_REPO="mirror.tuna.tsinghua.edu.cn"
+		;;
+	163)
+		DEBIAN_REPO="mirrors.163.com"
+		;;
+  *)
+		DEBIAN_REPO="deb.debian.org"
+		;;
+esac
+
+echo -e "\n  Now APK repo: ${DEBIAN_REPO}\n"
+sed -ri.$(date "+%F%T") "s/([^/0-9]+\.[a-z]+)/${DEBIAN_REPO}/g" /etc/apt/sources.list
