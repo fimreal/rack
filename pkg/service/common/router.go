@@ -7,7 +7,6 @@ import (
 )
 
 func AddRoutes(r *gin.Engine) {
-	r.NoRoute(helloWorld) // 404 => hello world
 
 	// client 相关
 	r.GET("/ip", ClientIP)

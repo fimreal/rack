@@ -12,6 +12,9 @@ func setFlag() {
 	pflag.StringP("port", "p", "5000", "指定启动端口")
 	pflag.StringP("workdir", "w", "./", "设置工作目录，用于存放数据库文件等")
 	pflag.BoolP("debug", "d", false, "debug mode")
+
+	pflag.BoolP("allservices", "a", false, "启用所有功能，用于 debug")
+
 	// swagger
 	pflag.Bool("swagger", false, "swagger docs")
 
@@ -22,7 +25,7 @@ func setFlag() {
 	pflag.Bool("docker", false, "dockerhub 镜像查询")
 
 	// fileserver
-	pflag.Bool("fileserver", false, "启用文件上传下载服务")
+	pflag.BoolP("fileserver", "f", false, "启用文件上传下载服务")
 
 	// mail
 	pflag.Bool("mail", false, "启用 http2mail 服务")
@@ -53,8 +56,11 @@ func setFlag() {
 	// scripts
 	pflag.Bool("scripts", false, "是否启用常用安装脚本下载")
 
+	// uproxy
+	pflag.Bool("uproxy", false, "是否启用代理访问")
+
 	// ngrok
-	pflag.Bool("ngrok", false, "是否启用 ngrok 转发")
+	pflag.BoolP("ngrok", "n", false, "是否启用 ngrok 转发")
 	pflag.String("ngrok.token", "", "ngrok auth token, find in https://dashboard.ngrok.com/get-started/your-authtoken")
 	pflag.String("ngrok.domain", "", "custom domain, eg. my-domain.ngrok.io")
 

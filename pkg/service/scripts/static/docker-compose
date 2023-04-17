@@ -1,0 +1,86 @@
+#!/bin/env sh
+
+# asset=https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
+# ghproxy_asset=https://ghproxy.com/https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
+
+# sudo curl -L "https://github.com/docker/compose/releases/download/$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq --raw-output '.tag_name')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# sudo chmod +x /usr/local/bin/docker-compose
+
+
+check_docker() {
+    if [ ! -z ${ignore_docker} ]; then
+        return
+    fi
+    docker version >/dev/null
+    if [ $? != 0 ] ; then
+        echo
+        echo "Please install docker firstly, use:"
+        echo
+        echo -e "\tcurl -sL epurs.com/i/docker | sh -"
+        echo
+        exit 1
+    fi
+}
+# fi needed
+check_docker
+
+GITHUB_ASSET_DOWNLOAD="https://github.com/docker/compose/releases/latest/download"
+if [ ! -z ${mirror} ]; then
+    echo "enable ghproxy"
+    GITHUB_ASSET_DOWNLOAD=https://ghproxy.com/${GITHUB_ASSET_DOWNLOAD}
+fi
+
+ARCH=$(uname -m)
+
+is_darwin() {
+	case "$(uname -s)" in
+	*darwin* ) true ;;
+	*Darwin* ) true ;;
+	* ) false;;
+	esac
+}
+
+is_wsl() {
+	case "$(uname -r)" in
+	*microsoft* ) true ;; # WSL 2
+	*Microsoft* ) true ;; # WSL 1
+	* ) false;;
+	esac
+}
+
+if is_darwin; then
+    OS=darwin
+elif is_wsl; then
+    OS=windows
+else
+    OS=linux
+fi
+
+ASSET_URL=${GITHUB_ASSET_DOWNLOAD}/docker-compose-${OS}-${ARCH}
+DIST="/usr/local/bin/docker-compose"
+
+command_exists() {
+	command -v "$@" &> /dev/null
+}
+
+download() {
+    echo "Download... ${ASSET_URL}"
+
+    if command_exists curl; then
+        curl -o ${DIST} -sfL ${ASSET_URL} 
+    elif command_exists wget; then
+        wget -qO ${DIST} ${ASSET_URL} 
+    else
+        echo "Not found download tool [ curl or wget ] "
+        exit 2
+    fi
+
+    # Abort if download command failed
+    if [ $? -ne 0 ]; then
+        echo 'Download failed'
+        exit 2
+    fi
+}
+
+download
+chmod +x ${DIST}

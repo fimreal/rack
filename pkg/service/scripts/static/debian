@@ -1,6 +1,11 @@
 #!/bin/env sh
+if [ -z $1 ]; then
+	_r=${mirror}
+else
+	_r=$1
+fi
 
-case "$1" in
+case "$_r" in
 	aliyun)
 		DEBIAN_REPO="mirrors.aliyun.com"
 		;;

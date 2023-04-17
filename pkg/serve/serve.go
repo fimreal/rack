@@ -4,17 +4,16 @@ import (
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/components/ngrok"
 	"github.com/fimreal/rack/pkg/config"
-	"github.com/fimreal/rack/pkg/service"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
-func init() {
-	config.LoadConfigs()
-}
-
-// Run() 启动 web api 服务，传入 address 可以为端口 :8000
+// new gin
 func Run() {
+	config.LoadConfigs()
+
+	printRack()
+
 	// new gin engine with recovery()
 	r := gin.New()
 	r.Use(gin.Recovery(), gin.LoggerWithConfig(
@@ -23,9 +22,7 @@ func Run() {
 		},
 	))
 
-	// 装载路由
-	r = loadRoutes(r)
-	// 启动
+	loadRoutes(r)
 	ezap.Fatal(serve(r))
 }
 
@@ -44,17 +41,4 @@ func serve(r *gin.Engine) error {
 	port := ":" + viper.GetString("port")
 	ezap.Infof("Listrning on %s", port)
 	return r.Run(port)
-}
-
-func loadRoutes(r *gin.Engine) *gin.Engine {
-	// only fileserver
-	if viper.GetBool("fileserver") {
-		service.RunFileserver(r)
-	}
-
-	healthcheck(r)
-	disallowRobots(r)
-	service.AddRoutes(r)
-
-	return r
 }
