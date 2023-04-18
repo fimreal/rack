@@ -57,7 +57,7 @@ func setFlag() {
 	pflag.Bool("scripts", false, "是否启用常用安装脚本下载")
 
 	// uproxy
-	pflag.Bool("uproxy", false, "是否启用代理访问")
+	// pflag.Bool("uproxy", false, "是否启用代理访问")
 
 	// ngrok
 	pflag.BoolP("ngrok", "n", false, "是否启用 ngrok 转发")

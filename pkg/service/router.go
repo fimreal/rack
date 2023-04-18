@@ -10,7 +10,6 @@ import (
 	"github.com/fimreal/rack/pkg/service/fileserver"
 	"github.com/fimreal/rack/pkg/service/ip2location"
 	"github.com/fimreal/rack/pkg/service/scripts"
-	"github.com/fimreal/rack/pkg/service/uproxy"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -55,8 +54,8 @@ func AddRoutes(r *gin.Engine) {
 		rg.POST("/", chatgpt.Ask)
 	}
 
-	if viper.GetBool("uproxy") || pass {
-		rg := r.Group("/uproxy")
-		uproxy.LoadRoute(rg)
-	}
+	// if viper.GetBool("uproxy") || pass {
+	// 	rg := r.Group("/uproxy")
+	// 	uproxy.LoadRoute(rg)
+	// }
 }
