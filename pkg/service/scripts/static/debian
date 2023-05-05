@@ -23,5 +23,5 @@ case "$_r" in
 		;;
 esac
 
-echo -e "\n  Now APK repo: ${DEBIAN_REPO}\n"
+echo -e "\n  Now apt repo: ${DEBIAN_REPO}\n"
 sed -ri.$(date "+%F%T") "s/([^/0-9]+\.[a-z]+)/${DEBIAN_REPO}/g" /etc/apt/sources.list

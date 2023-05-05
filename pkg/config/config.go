@@ -1,6 +1,7 @@
 package config
 
 import (
+	"os"
 	"strings"
 
 	"github.com/fimreal/goutils/ezap"
@@ -16,6 +17,11 @@ func LoadConfigs() {
 	viper.SetEnvKeyReplacer(strings.NewReplacer(`.`, ``))
 	viper.AutomaticEnv() // 加载环境变量
 	setFlag()            // 解析传入参数
+
+	if viper.GetBool("version") {
+		ezap.Println("Rack", VERSION)
+		os.Exit(0)
+	}
 
 	if viper.GetBool("debug") {
 		ezap.SetLevel("debug")

@@ -12,6 +12,7 @@ func setFlag() {
 	pflag.StringP("port", "p", "5000", "指定启动端口")
 	pflag.StringP("workdir", "w", "./", "设置工作目录，用于存放数据库文件等")
 	pflag.BoolP("debug", "d", false, "debug mode")
+	pflag.BoolP("version", "v", false, "show app version")
 
 	pflag.BoolP("allservices", "a", false, "启用所有功能，用于 debug")
 

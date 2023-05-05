@@ -100,7 +100,7 @@ if ${use_color}; then
             # but before setting $PS1
             RET=$?
             change_window_title
-            if [ $RET -gt 0 ]; then
+            if [ $RET -gt 0 ] && [ $RET -ne 130 ]; then
                 PS1+="\[\033[01;35m\]$RET \[\033[01;32m\]\u\[\033[00m\]@\h \[\033[01;34m\]\w \[\033[00m\]\$ "
             else
                 PS1+="\[\033[01;32m\]\u\[\033[00m\]@\h \[\033[01;34m\]\w \[\033[00m\]\$ "

@@ -5,7 +5,7 @@ import (
 )
 
 // @title    rack
-// @version  0.3.0
+// @version  0.4
 func main() {
 	serve.Run()
 }
