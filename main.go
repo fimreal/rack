@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/fimreal/rack/pkg/serve"
+	"github.com/fimreal/rack/pkg/cmd"
 )
 
 // @title    rack
-// @version  0.4
+// @version  0.5
 func main() {
-	serve.Run()
+	cmd.Execute()
 }

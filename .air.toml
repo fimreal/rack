@@ -3,7 +3,7 @@ testdata_dir = "testdata"
 tmp_dir = "tmp"
 
 [build]
-  full_bin = "./tmp/main "
+  full_bin = "./tmp/main serve"
   bin = "tmp/main"
   args_bin = ["-d","-a"]
   cmd = "go build -o ./tmp/main ."

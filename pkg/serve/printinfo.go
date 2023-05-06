@@ -1,9 +1,12 @@
 package serve
 
-import "fmt"
+import (
+	"github.com/fimreal/goutils/ezap"
+	"github.com/fimreal/rack/pkg/config"
+)
 
-func printRack() {
-	fmt.Print(
+func PrintRack() {
+	ezap.Print(
 		` ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
 ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
 ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ 
@@ -15,4 +18,12 @@ func printRack() {
    ░           ░  ░░ ░      ░  ░   
                    ░    
 `)
+}
+
+func PrintVersion() {
+	ezap.Println("rack Version " + config.VERSION)
+	ezap.Println("rack Mod: ")
+	for _, mv := range config.MODVERSION {
+		ezap.Print(mv + " ")
+	}
 }

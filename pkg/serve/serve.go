@@ -8,12 +8,14 @@ import (
 	"github.com/spf13/viper"
 )
 
+func init() {
+	PrintVersion()
+	PrintRack()
+}
+
 // new gin
 func Run() {
 	config.LoadConfigs()
-
-	printRack()
-
 	// new gin engine with recovery()
 	r := gin.New()
 	r.Use(gin.Recovery(), gin.LoggerWithConfig(
@@ -22,10 +24,15 @@ func Run() {
 		},
 	))
 
+	if !viper.GetBool("debug") {
+		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
+	}
+
 	loadRoutes(r)
 	ezap.Fatal(serve(r))
 }
 
+// ngrok or local
 func serve(r *gin.Engine) error {
 	// ngrok
 	if viper.GetBool("ngrok") {
