@@ -30,6 +30,9 @@ func AddRoutes(r *gin.Engine) {
 	r.GET("/pip/:ip", IsPrivateIP)
 	r.GET("/rip/:ip", IsReservedIP)
 
+	// email
+	r.GET("/remail/:email", IsRealMail)
+
 	// 小函数
 	r.GET("/code", SixNumber)
 	r.GET("/genpass", GenRandomPassword)
