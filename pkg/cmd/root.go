@@ -6,6 +6,7 @@ package cmd
 import (
 	"os"
 
+	"github.com/fimreal/rack/module"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,5 +28,6 @@ func Execute() {
 func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "debug mode")
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
-	// viper.BindPFlags(rootCmd.Flags())
+	module.NewFlag(rootCmd)
+	viper.BindPFlags(rootCmd.Flags())
 }

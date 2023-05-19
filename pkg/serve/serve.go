@@ -2,6 +2,8 @@ package serve
 
 import (
 	"github.com/fimreal/goutils/ezap"
+	"github.com/fimreal/rack/module"
+	"github.com/fimreal/rack/module/ipquery"
 	"github.com/fimreal/rack/pkg/components/ngrok"
 	"github.com/fimreal/rack/pkg/config"
 	"github.com/gin-gonic/gin"
@@ -11,25 +13,24 @@ import (
 func init() {
 	PrintVersion()
 	PrintRack()
+	module.Register(&ipquery.Module)
+	config.LoadConfigs()
 }
 
-// new gin
 func Run() {
-	config.LoadConfigs()
+	if !viper.GetBool("debug") {
+		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
+	}
 	// new gin engine with recovery()
-	r := gin.New()
-	r.Use(gin.Recovery(), gin.LoggerWithConfig(
+	g := gin.New()
+	g.Use(gin.Recovery(), gin.LoggerWithConfig(
 		gin.LoggerConfig{
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
-
-	if !viper.GetBool("debug") {
-		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
-	}
-
-	loadRoutes(r)
-	ezap.Fatal(serve(r))
+	module.GinLoad(g)
+	loadRoutes(g)
+	ezap.Fatal(serve(g))
 }
 
 // ngrok or local
