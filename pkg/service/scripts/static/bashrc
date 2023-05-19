@@ -121,15 +121,28 @@ else
     change_window_title
     PS1+='\u@\h \w \$ '
 fi
+
+# tiny PS1
+function tinyps1() {
+    if [[ ${EUID} == 0 ]] ; then
+        PS1='\[\033[01;34m\]\W \#\[\033[00m\] '
+    else
+        PS1='\[\033[01;34m\]\W \$\[\033[00m\] '
+    fi
+}
+if [[ ${TERM_PROGRAM} == "vscode" ]] ; then
+    tinyps1
+fi
+
 # Try to keep environment pollution down, EPA loves us.
 unset use_color
+
 
 ##========== ENV ==========##
 # iterm2
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # timezone
-TZ='Asia/Shanghai'
-export TZ
+export TZ='Asia/Shanghai'
 # HISTORY conf
 export HISTSIZE=100000
 export HISTFILESIZE=100000
@@ -144,6 +157,12 @@ if command -v vim &>/dev/null; then
 elif command -v vi &>/dev/null; then
     export EDITOR=vi
 fi
+
+# goproxy
+export HUGO_MODULE_PROXY=https://goproxy.cn/,direct
+export GOPROXY=https://goproxy.cn,direct \
+       GO111MOUDULE=on \
+     # GOPATH=~/go:~/OneDrive/Code_root/golang:$GOPATH
 
 ##========== alias ==========##
 alias la='ls -AF'
@@ -166,9 +185,12 @@ alias ktn='kubectl top node'
 # alias kdn='kubectl get pod -o wide --all-namespaces | awk '{if($4!="Running"){cmd="kubectl -n "$1" delete pod "$2; system(cmd)}}''
 # alias nginx='kubectl exec $(kubectl get pods -o jsonpath='"'"'{range .items[*]}{@.metadata.name}{"\n"}{end}'"'"' -l app=openresty) -- nginx '
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gomodoff="go env -w GO111MODULE=off"
+alias gomodon="go env -w GO111MODULE=on"
+alias jet="step crypto jwt inspect --insecure <<<"
 
 if command -v podman &>/dev/null; then
-    alias docker='echo '\''hey, Don not use docker'\'''
+    alias docker='echo '\''podman: hey, Don not use docker, '\'''
 fi
 
 ##========== completion ==========##
@@ -195,18 +217,18 @@ function proxy_on() {
     export http_proxy="http://127.0.0.1:${port:-1080}"
     export https_proxy=$http_proxy
     export PS1="\[\e[36;1m\](proxy on)\[\e[35;0m\]$_PROXY_PS1_ORI"
-    echo "已开启代理 $http_proxy $(timeout 3 curl -s epurs.com/ipinfo | jq -r '. | .query + " " + .country')"
+    echo "proxy enabled now. $http_proxy $(timeout 3 curl -s epurs.com/ipinfo | jq -r '. | .query + " " + .country')"
 }
 function proxy_off() {
     unset http_proxy
     unset https_proxy
     unset no_proxy
     export PS1=$_PROXY_PS1_ORI
-    echo "已关闭代理"
+    echo "proxy disabled now"
 }
 
 function with_proxy() {
-    no_proxy="localhost,127.0.0.1,localaddress,.localdomaiin.com" https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890  "$@"
+    no_proxy="localhost,127.0.0.1,localaddress,.localdomaiin.com" https_proxy=http://127.0.0.1:1080 http_proxy=http://127.0.0.1:1080 all_proxy=socks5://127.0.0.1:1080  "$@"
 }
 
 # Get my ip

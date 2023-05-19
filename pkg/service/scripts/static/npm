@@ -1,0 +1,22 @@
+#!/bin/env sh
+
+if [ -z $1 ]; then
+	_r=${mirror}
+else
+	_r=$1
+fi
+
+case "$_r" in
+aliyun)
+	NPM_REPO="http://registry.npmmirror.com"
+	;;
+huawei)
+	NPM_REPO="https://mirrors.huaweicloud.com/repository/npm"
+	;;
+*)
+	NPM_REPO="https://registry.npmjs.org"
+	;;
+esac
+
+npm config set registry ${NPM_REPO}
+echo -e "\n  Now npm registry: ${NPM_REPO}\n"

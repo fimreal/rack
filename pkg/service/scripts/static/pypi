@@ -1,0 +1,31 @@
+#!/bin/env sh
+
+if [ -z $1 ]; then
+	_r=${mirror}
+else
+	_r=$1
+fi
+
+case "$_r" in
+aliyun)
+	PYPI_MIRROR="https://mirrors.aliyun.com/pypi/simple/"
+	;;
+ustc)
+	PYPI_MIRROR="https://pypi.mirrors.ustc.edu.cn/simple/"
+	;;
+tuna)
+	PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
+	;;
+tencent)
+	PYPI_MIRROR="https://mirrors.tencent.com/pypi/simple/"
+	;;
+douban)
+	PYPI_MIRROR="https://pypi.douban.com/simple/"
+	;;
+*)
+	PYPI_MIRROR="https://pypi.org/simple"
+	;;
+esac
+
+pip config set global.index-url ${PYPI_MIRROR}
+echo -e "\n  Now pip(pypi) index-url: ${PYPI_MIRROR}\n"
