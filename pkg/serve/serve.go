@@ -28,8 +28,8 @@ func Run() {
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
-	module.GinLoad(g)
 	loadRoutes(g)
+	module.GinLoad(g)
 	ezap.Fatal(serve(g))
 }
 
