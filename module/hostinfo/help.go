@@ -7,7 +7,7 @@ import (
 )
 
 func help(ctx *gin.Context) {
-	ctx.String(http.StatusOK, `/hostip
-/hostname
+	ctx.String(http.StatusOK, `/hostip	show host ip list
+/hostname	show hostname
 `)
 }
