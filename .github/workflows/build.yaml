@@ -15,12 +15,11 @@ jobs:
           go-version: 1.19
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
 
       - name: Set tag vars
         run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-      - name: Git Sumbodule Update
-        run: |
-          git pull --recurse-submodules
         
       - name: go build
         run: make all && ls -l bin
