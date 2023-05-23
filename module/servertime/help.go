@@ -8,6 +8,6 @@ import (
 
 func help(ctx *gin.Context) {
 	ctx.String(http.StatusOK, `/time
-	/time/:ts
+/time/:ts
 `)
 }

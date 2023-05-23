@@ -11,5 +11,5 @@ func setLogger() {
 	if viper.GetBool("debug") {
 		ezap.SetLevel("debug")
 	}
-	ezap.Debug("开启 debug 模式")
+	ezap.Debug("logging debug  ✔")
 }

@@ -7,6 +7,5 @@ import (
 )
 
 func help(ctx *gin.Context) {
-	ctx.String(http.StatusOK, `/i/<scriptsname>
-`)
+	ctx.String(http.StatusOK, `/i/<scriptsname>`)
 }

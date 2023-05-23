@@ -4,7 +4,6 @@ import (
 	"github.com/fimreal/rack/pkg/components/swagger"
 	"github.com/fimreal/rack/pkg/service/aliyun"
 	"github.com/fimreal/rack/pkg/service/chatgpt"
-	"github.com/fimreal/rack/pkg/service/dockerhub"
 	"github.com/fimreal/rack/pkg/service/email"
 	"github.com/fimreal/rack/pkg/service/fileserver"
 	"github.com/fimreal/rack/pkg/service/ip2location"
@@ -21,9 +20,6 @@ func AddRoutes(r *gin.Engine) {
 	}
 	if viper.GetBool("swagger") || pass {
 		swagger.AddRoutes(r)
-	}
-	if viper.GetBool("docker") || pass {
-		r.GET("/docker.io/:namespace/:repository/*result", dockerhub.ListTags)
 	}
 
 	if viper.GetBool("aliyun") || pass {
@@ -46,8 +42,4 @@ func AddRoutes(r *gin.Engine) {
 		rg.POST("/", chatgpt.Ask)
 	}
 
-	// if viper.GetBool("uproxy") || pass {
-	// 	rg := r.Group("/uproxy")
-	// 	uproxy.LoadRoute(rg)
-	// }
 }

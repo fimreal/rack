@@ -8,6 +8,12 @@ import (
 	"github.com/spf13/viper"
 )
 
+func init() {
+	if viper.GetBool("ip2location") {
+		go GetDB()
+	}
+}
+
 var DB_FILENAME string
 
 // 预下载数据库，并解压

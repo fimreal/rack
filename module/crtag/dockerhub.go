@@ -1,4 +1,4 @@
-package dockerhub
+package crtag
 
 import (
 	"encoding/json"
@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ListTags(c *gin.Context) {
+func ListDockerhubTags(c *gin.Context) {
 	ns := c.Param("namespace")
 	repo := c.Param("repository")
 	result := c.Param("result")

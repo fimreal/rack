@@ -14,10 +14,10 @@ func AddRoute(g *gin.Engine) {
 	r := g.Group(RoutePrefix)
 
 	// list route
-	r.GET("/help/"+ID, help)
+	g.GET("/help/"+ID, help)
 
 	// 如果在 embed 中找到文件，直接返回结果
 	// 如果没有找到，则执行 reqGHPage(c)，请求 github 最新页面
-	g.Use(inFile)
-	g.StaticFS("/", http.FS(StaticFiles))
+	r.Use(inFile)
+	r.StaticFS("/", http.FS(StaticFiles))
 }

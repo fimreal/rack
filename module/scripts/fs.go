@@ -5,8 +5,8 @@ import (
 	"io/fs"
 )
 
-//go:embed static
 var (
+	//go:embed static
 	FSstatic       embed.FS
 	StaticFiles, _ = fs.Sub(FSstatic, "static")
 )

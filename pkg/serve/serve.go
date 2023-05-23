@@ -5,7 +5,6 @@ import (
 	"github.com/fimreal/rack/module"
 	"github.com/fimreal/rack/pkg/components/ngrok"
 	"github.com/fimreal/rack/pkg/config"
-	"github.com/fimreal/rack/pkg/service"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -22,7 +21,7 @@ func Run() {
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
-	service.AddRoutes(g)
+	// service.AddRoutes(g)
 	module.GinLoad(g)
 	ezap.Fatal(serve(g))
 }
