@@ -17,7 +17,7 @@ func ListDockerhubTags(c *gin.Context) {
 	httpcode, b, err := listRepoTags(ns, repo, rawQuery)
 	if err != nil {
 		ezap.Error(err.Error())
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "can not get tags info", "detail": err.Error()})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": "can not get tags info, please try again later"})
 		return
 	}
 
@@ -26,7 +26,7 @@ func ListDockerhubTags(c *gin.Context) {
 		var e = &ErrorResp{}
 		err := json.Unmarshal(b, &e)
 		if err != nil {
-			c.JSON(httpcode, e)
+			c.AbortWithStatusJSON(httpcode, e)
 			return
 		}
 	}

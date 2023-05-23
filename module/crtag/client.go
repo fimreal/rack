@@ -24,9 +24,9 @@ const (
 func listRepoTags(namespace, repository, rawQuery string) (httpcode int, body []byte, err error) {
 	url := fmt.Sprintf("%s/v2/namespaces/%s/repositories/%s/tags?%s", dockerhub, namespace, repository, rawQuery)
 	ezap.Debug("request " + url)
-
+	url = APIPROXY + url
 	resp, err := httpDo(url, "GET", nil, nil)
-	if errors.Is(err, syscall.ECONNRESET) || err.(net.Error).Timeout() {
+	if err != nil && (errors.Is(err, syscall.ECONNRESET) || err.(net.Error).Timeout()) {
 		ezap.Info("Connection to " + dockerhub + " timed out or certificate validation failed. Try using built-in proxy to access.")
 		url = APIPROXY + url
 		ezap.Debug("re request " + url)
@@ -45,7 +45,7 @@ func listRepoTags(namespace, repository, rawQuery string) (httpcode int, body []
 }
 
 func httpDo(url string, method string, data []byte, headers map[string]string) (*http.Response, error) {
-	client := &http.Client{Timeout: 3 * time.Second}
+	client := &http.Client{Timeout: 8 * time.Second}
 
 	req, err := http.NewRequest(method, url, strings.NewReader(string(data)))
 	if err != nil {

@@ -55,7 +55,7 @@ func CloudFlareDoh(name string) (answer *CFDOHResp, err error) {
 	headers := map[string]string{"accept": "application/dns-json"}
 
 	resp, err := httpDo(api, "GET", nil, headers)
-	if errors.Is(err, syscall.ECONNRESET) || err.(net.Error).Timeout() {
+	if err != nil && (errors.Is(err, syscall.ECONNRESET) || err.(net.Error).Timeout()) {
 		ezap.Info("Connection to https://cloudflare-dns.com/dns-query timed out or certificate validation failed. Try using built-in proxy to access.")
 		api = APIPROXY + api
 		resp, err = httpDo(api, "GET", nil, headers)
@@ -73,7 +73,7 @@ func CloudFlareDoh(name string) (answer *CFDOHResp, err error) {
 }
 
 func httpDo(url string, method string, data []byte, headers map[string]string) (*http.Response, error) {
-	client := &http.Client{Timeout: 3 * time.Second}
+	client := &http.Client{Timeout: 5 * time.Second}
 
 	req, err := http.NewRequest(method, url, strings.NewReader(string(data)))
 	if err != nil {
