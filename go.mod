@@ -4,12 +4,13 @@ go 1.19
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.28
-	github.com/fimreal/goutils v0.0.0-20221121063615-26b18de1e613
+	github.com/fimreal/goutils v0.0.0-20230414034050-319a3bfa7f38
 	github.com/gin-gonic/gin v1.9.0
-	github.com/gomarkdown/markdown v0.0.0-20221013030248-663e2500819c
+	github.com/gomarkdown/markdown v0.0.0-20230322041520-c84983bdbf2a
 	github.com/google/uuid v1.3.0
 	github.com/ip2location/ip2location-go/v9 v9.5.0
-	github.com/sashabaranov/go-openai v1.5.5
+	github.com/rack-plugins/chatgpt v0.0.0-20230523075313-0039d23a253e
+	github.com/sashabaranov/go-openai v1.9.4
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.15.0
 	github.com/swaggo/files v0.0.0-20220728132757-551d4a08d97a

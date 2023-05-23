@@ -13,6 +13,7 @@ import (
 	"github.com/fimreal/rack/module/scripts"
 	"github.com/fimreal/rack/module/servertime"
 	"github.com/fimreal/rack/pkg/cmd"
+	"github.com/rack-plugins/chatgpt"
 )
 
 var MODS = []*module.Module{
@@ -28,6 +29,9 @@ var MODS = []*module.Module{
 	&emailcheck.Module,
 	&scripts.Module,
 	&crtag.Module,
+
+	// opt
+	&chatgpt.Module,
 }
 
 func init() {
