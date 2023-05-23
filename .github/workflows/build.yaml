@@ -21,7 +21,6 @@ jobs:
       - name: Git Sumbodule Update
         run: |
           git pull --recurse-submodules
-          git submodule update --remote --recursive
         
       - name: go build
         run: make all && ls -l bin

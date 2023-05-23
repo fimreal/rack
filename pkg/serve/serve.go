@@ -16,12 +16,8 @@ func Run() {
 	}
 	// new gin engine with recovery()
 	g := gin.New()
-	g.Use(gin.Recovery(), gin.LoggerWithConfig(
-		gin.LoggerConfig{
-			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
-		},
-	))
-	// service.AddRoutes(g)
+	g.Use(gin.Recovery())
+
 	module.GinLoad(g)
 	ezap.Fatal(serve(g))
 }

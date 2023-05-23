@@ -10,7 +10,7 @@ func AddRoute(g *gin.Engine) {
 		return
 	}
 
-	g.Use(gin.Recovery(), gin.LoggerWithConfig(
+	g.Use(gin.LoggerWithConfig(
 		gin.LoggerConfig{
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
