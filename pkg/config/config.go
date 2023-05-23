@@ -23,4 +23,6 @@ func LoadConfigs() {
 	if viper.GetBool("ip2location") {
 		ip2location.GetDB()
 	}
+
+	version()
 }

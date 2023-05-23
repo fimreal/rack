@@ -4,7 +4,6 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/fimreal/rack/module"
 	"github.com/fimreal/rack/pkg/serve"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -13,8 +12,8 @@ import (
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Starting (gin) web service",
-	Long:  `Starting (gin) web service`,
+	Short: "flags for Starting (gin) web service",
+	Long:  `flags for Starting (gin) web service`,
 	Run: func(cmd *cobra.Command, args []string) {
 		serve.Run()
 	},
@@ -56,9 +55,6 @@ func init() {
 	serveCmd.Flags().Bool("ip2location", false, "是否启用 ip2location 查询")
 	serveCmd.Flags().String("ip2location.db", "DB11", "IP 数据库等级, 可选 DB1 DB3 DB5 DB9 DB11, 数字越大数据库内容越丰富, 相应数据库也就越大")
 	serveCmd.Flags().String("ip2location.token", "", "ip2location lite token")
-
-	// load module
-	module.FlagParse(serveCmd)
 
 	// viper bind
 	viper.BindPFlags(serveCmd.Flags())

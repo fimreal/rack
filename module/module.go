@@ -1,6 +1,7 @@
 package module
 
 import (
+	"github.com/fimreal/goutils/ezap"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
@@ -29,7 +30,7 @@ type Module struct {
 	CliFlagFunc func(*cobra.Command) // flag
 }
 
-func Register(modules ...ModuleInterface) {
+func Register(modules []*Module) {
 	for _, module := range modules {
 		module.Apply()
 	}
@@ -42,9 +43,6 @@ func GinLoad(r *gin.Engine) {
 }
 
 func FlagParse(serveCmd *cobra.Command) {
-	if len(FlagFuncs) == 0 {
-		return
-	}
 	for _, f := range FlagFuncs {
 		if f != nil {
 			f(serveCmd)
@@ -73,6 +71,7 @@ func (m *Module) RouterGroup() string {
 }
 
 func (m *Module) Apply() {
+	ezap.Info("[module] Load " + m.ID)
 	RouteFuncs = append(RouteFuncs, m.RouteFunc)
 	ModVersion = append(ModVersion, m.ID)
 	FlagFuncs = append(FlagFuncs, m.FlagFunc)

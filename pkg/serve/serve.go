@@ -3,21 +3,15 @@ package serve
 import (
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/module"
-	"github.com/fimreal/rack/module/ipquery"
 	"github.com/fimreal/rack/pkg/components/ngrok"
 	"github.com/fimreal/rack/pkg/config"
+	"github.com/fimreal/rack/pkg/service"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
-func init() {
-	PrintVersion()
-	PrintRack()
-	module.Register(&ipquery.Module)
-	config.LoadConfigs()
-}
-
 func Run() {
+	config.LoadConfigs()
 	if !viper.GetBool("debug") {
 		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
 	}
@@ -28,7 +22,7 @@ func Run() {
 			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
 		},
 	))
-	loadRoutes(g)
+	service.AddRoutes(g)
 	module.GinLoad(g)
 	ezap.Fatal(serve(g))
 }

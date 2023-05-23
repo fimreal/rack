@@ -28,6 +28,13 @@ func Execute() {
 func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "debug mode")
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
-	module.NewFlag(rootCmd)
 	viper.BindPFlags(rootCmd.Flags())
+}
+
+func LoadModuleFlags() {
+	module.NewFlag(rootCmd)
+	module.FlagParse(serveCmd)
+
+	viper.BindPFlags(rootCmd.Flags())
+	viper.BindPFlags(serveCmd.Flags())
 }

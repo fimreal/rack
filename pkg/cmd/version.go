@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/fimreal/rack/pkg/serve"
+	"github.com/fimreal/rack/pkg/config"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ var versionCmd = &cobra.Command{
 	Short: "show rack version and module version",
 	Long:  `show rack version and module version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		serve.PrintVersion()
+		config.PrintVersion()
 	},
 }
 
