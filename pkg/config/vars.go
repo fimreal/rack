@@ -1,6 +1,6 @@
 package config
 
 var (
-	VERSION    = "v0.4.1"
+	VERSION    = "v0.5"
 	MODVERSION = []string{}
 )
