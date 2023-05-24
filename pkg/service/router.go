@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/fimreal/rack/pkg/components/swagger"
 	"github.com/fimreal/rack/pkg/service/aliyun"
-	"github.com/fimreal/rack/pkg/service/chatgpt"
 	"github.com/fimreal/rack/pkg/service/email"
 	"github.com/fimreal/rack/pkg/service/fileserver"
 	"github.com/fimreal/rack/pkg/service/ip2location"
@@ -34,12 +33,6 @@ func AddRoutes(r *gin.Engine) {
 		rg := r.Group("/ip2location")
 		rg.GET("/:ip", ip2location.IpQuery)
 		rg.POST("/:ip", ip2location.IpQuery)
-	}
-
-	if viper.GetBool("chatgpt") || pass {
-		rg := r.Group("/chatgpt")
-		rg.GET("/", chatgpt.Ask)
-		rg.POST("/", chatgpt.Ask)
 	}
 
 }
