@@ -36,6 +36,7 @@ var MODS = []*module.Module{
 	&chatgpt.Module,
 	&email.Module,
 	&aliyun.Module,
+	// &shorturl.Module,
 }
 
 func init() {

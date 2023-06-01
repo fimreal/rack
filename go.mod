@@ -4,18 +4,18 @@ go 1.19
 
 require (
 	github.com/fimreal/goutils v0.0.0-20230414034050-319a3bfa7f38
-	github.com/gin-gonic/gin v1.9.0
+	github.com/gin-gonic/gin v1.9.1
 	github.com/google/uuid v1.3.0
 	github.com/ip2location/ip2location-go/v9 v9.6.0
-	github.com/rack-plugins/aliyun v0.0.0-20230524024514-1094e3365891
+	github.com/rack-plugins/aliyun v0.0.0-20230524071748-edc8335a6216
 	github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55
-	github.com/rack-plugins/email v0.0.0-20230524013024-6eb73d20098d
+	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
 	github.com/spf13/cobra v1.7.0
-	github.com/spf13/viper v1.15.0
+	github.com/spf13/viper v1.16.0
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.1
-	golang.ngrok.com/ngrok v1.0.0
+	golang.ngrok.com/ngrok v1.1.0
 	golang.org/x/net v0.10.0
 )
 
@@ -24,7 +24,7 @@ require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.340 // indirect
-	github.com/bytedance/sonic v1.8.10 // indirect
+	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
