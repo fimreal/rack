@@ -22,11 +22,11 @@ func inFile(c *gin.Context) {
 			if os.IsNotExist(err) {
 				// do request github pages
 				reqGHPage(c)
-				c.Done()
+				return
 			}
 			ezap.Error(err.Error())
 			c.String(http.StatusInternalServerError, err.Error())
-			c.Done()
+			return
 		}
 		// 如果不是 HTML 请求，则添加文本 MIME 类型和缓存头
 		// if !strings.HasSuffix(c.Request.RequestURI, ".html") {
