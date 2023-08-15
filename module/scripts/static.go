@@ -22,10 +22,12 @@ func inFile(c *gin.Context) {
 			if os.IsNotExist(err) {
 				// do request github pages
 				reqGHPage(c)
+				c.Abort()
 				return
 			}
 			ezap.Error(err.Error())
 			c.String(http.StatusInternalServerError, err.Error())
+			c.Abort()
 			return
 		}
 		// 如果不是 HTML 请求，则添加文本 MIME 类型和缓存头
@@ -39,7 +41,7 @@ func inFile(c *gin.Context) {
 
 // 找不到 embed 文件时，请求 https://s.epurs.com
 func reqGHPage(c *gin.Context) {
-	remote, _ := url.Parse("http://s.epurs.com")
+	remote, _ := url.Parse(ScriptsHub)
 	filename := strings.TrimPrefix(c.Request.RequestURI, "/i/")
 	proxy := httputil.NewSingleHostReverseProxy(remote)
 	proxy.Director = func(req *http.Request) {

@@ -10,6 +10,7 @@ const (
 	Comment       = "one-click scripts static file"
 	RoutePrefix   = "/i"
 	DefaultEnable = false
+	ScriptsHub    = "http://s.epurs.com"
 )
 
 var Module = module.Module{
