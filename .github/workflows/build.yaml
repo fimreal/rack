@@ -6,7 +6,8 @@ on:
       - "v*"
 
 jobs:
-  build:
+  release:
+    name: release publish
     runs-on: ubuntu-latest
     steps:
       - name: set up go
@@ -21,8 +22,6 @@ jobs:
       - name: Set tag vars
         run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
         
-      - name: go build
-        run: make all && ls -l bin
       # publish release asset
       - name: Create Release
         id: create_release
@@ -30,12 +29,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          allowUpdates: true
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           draft: false
           prerelease: false
-      # if: ${{ github.ref != 'refs/heads/main' }}
+
+      - name: go build
+        run: make all && ls -l bin
       - name: Upload Release Assets
         id: upload-release-assets
         uses: dwenegar/upload-release-assets@v1
@@ -44,6 +44,18 @@ jobs:
         with:
           release_id: ${{ steps.create_release.outputs.id }}
           assets_path: ./bin/*
+
+
+  dockerhub:
+    name: build and push to dockerhub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+      - name: Set tag vars
+        run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -73,3 +85,4 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:alpine
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}-alpine
+
