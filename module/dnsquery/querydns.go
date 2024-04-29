@@ -28,7 +28,7 @@ func DNSQueryLocal(c *gin.Context) {
 		c.String(http.StatusOK, cname)
 		return
 	}
-	iprecords, err := net.LookupIP(c.Param("host"))
+	iprecords, err := net.LookupIP(host)
 	if err != nil {
 		ezap.Error(err.Error())
 		c.String(http.StatusInternalServerError, err.Error())

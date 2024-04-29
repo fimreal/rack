@@ -5,8 +5,9 @@ import (
 	"github.com/fimreal/rack/module"
 )
 
-func version() {
+func ShowInfo() {
 	PrintVersion()
+	PrintMods()
 	PrintRack()
 }
 
@@ -25,10 +26,13 @@ func PrintRack() {
 `)
 }
 
-func PrintVersion() {
-	ezap.Println("rack Version " + VERSION)
+func PrintMods() {
 	ezap.Printf("build with Mod: %+v\n", module.ModVersion)
 	for _, mv := range MODVERSION {
 		ezap.Print(mv + " ")
 	}
+}
+
+func PrintVersion() {
+	ezap.Println("Rack Version: " + VERSION)
 }

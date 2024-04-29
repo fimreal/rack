@@ -29,19 +29,3 @@ func IsRealMail(c *gin.Context) {
 	}
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
-
-// 判断是否为真实 email
-// func IsRealMail(c *gin.Context) {
-// 	email := c.Param("email")
-// 	meetchopraToken := "2b1e810090b21cab8a8753ec6bd1f091f35ce5a28bc6135561a12eb0814ae6de5e5603dc00fabffba179541b31d27dac"
-// 	isReal, err := meetchopra.Verify(email, meetchopraToken)
-// 	if err != nil {
-// 		ezap.Error(err.Error())
-// 		c.String(500, err.Error())
-// 	}
-// 	if isReal {
-// 		c.String(http.StatusOK, "true")
-// 	} else {
-// 		c.String(http.StatusOK, "false")
-// 	}
-// }

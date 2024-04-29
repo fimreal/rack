@@ -6,7 +6,9 @@ package cmd
 import (
 	"os"
 
+	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/module"
+	"github.com/fimreal/rack/pkg/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -26,9 +28,35 @@ func Execute() {
 }
 
 func init() {
+	cobra.OnInitialize(fileConfig, config.LoadConfigs)
+
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "debug mode")
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
 	viper.BindPFlags(rootCmd.Flags())
+}
+
+var cfgFile string
+
+// initConfig reads in config file and ENV variables if set.
+func fileConfig() {
+	if cfgFile != "" {
+		// Use config file from the flag.
+		viper.SetConfigFile(cfgFile)
+	} else {
+		// Find home directory.
+		home, err := os.UserHomeDir()
+		ezap.Debugf("Could not found user home directory: %s", err)
+
+		// Search config in home directory with name ".goproxy" (without extension).
+		viper.AddConfigPath(home)
+		viper.SetConfigType("yaml")
+		viper.SetConfigName(".rack")
+	}
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		ezap.Info("Using config file:", viper.ConfigFileUsed())
+	}
 }
 
 func LoadModuleFlags() {

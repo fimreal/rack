@@ -10,7 +10,7 @@ import (
 )
 
 func Run() {
-	config.LoadConfigs()
+	config.ShowInfo()
 	if !viper.GetBool("debug") {
 		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
 	}
@@ -36,6 +36,6 @@ func serve(r *gin.Engine) error {
 
 	// listening on local addr
 	port := ":" + viper.GetString("port")
-	ezap.Infof("Listrning on %s", port)
+	ezap.Infof("Listening on %s", port)
 	return r.Run(port)
 }

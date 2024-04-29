@@ -21,6 +21,7 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+	serveCmd.Flags().StringP("configFile", "c", "", "set config file")
 	serveCmd.Flags().BoolP("daemon", "D", false, "daemon mode")
 	serveCmd.Flags().StringP("port", "p", "3333", "set listen port")
 	serveCmd.Flags().StringP("workdir", "w", ".", "set application working floder")
