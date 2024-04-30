@@ -1,6 +1,6 @@
 module github.com/fimreal/rack
 
-go 1.19
+go 1.21
 
 require (
 	github.com/fimreal/goutils v0.0.0-20240410031514-d4cb5221bad3
