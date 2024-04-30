@@ -137,8 +137,8 @@ github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2 h1:oG0UBwMdWpP1
 github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2/go.mod h1:qWS8ymUqerr8D5hocbPgV/hP2HwlpR5OwCwK9D3PHq8=
 github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17 h1:FvZLwtZ9pFuB/ts6yrtlj9KXb8BYwdWE0Bb59c9N7ac=
 github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17/go.mod h1:JcWWskwj8zedeEbe4ZKV54uh1jioA4M4gwj003MtYh8=
-github.com/rack-plugins/qcloud v0.1.1 h1:v9IpaPHOtFvoPUl70pSuDRk6orHZmKlmH+A6AK3Hbug=
-github.com/rack-plugins/qcloud v0.1.1/go.mod h1:kR/Wlrf4mzbh6h4UXqzi20P5Muw5HaXh80OX77Hokhg=
+github.com/rack-plugins/qcloud v0.1.2 h1:cgOehoJ0rNF+R8DjMi6+U78D5nC7NueSxvaz74oyKOI=
+github.com/rack-plugins/qcloud v0.1.2/go.mod h1:kR/Wlrf4mzbh6h4UXqzi20P5Muw5HaXh80OX77Hokhg=
 github.com/rogpeppe/go-internal v1.11.0 h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDNXVBh4M=
 github.com/rogpeppe/go-internal v1.11.0/go.mod h1:ddIwULY96R17DhadqLgMfk9H9tvdUzkipdSkR5nkCZA=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
