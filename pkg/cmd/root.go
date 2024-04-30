@@ -45,7 +45,9 @@ func fileConfig() {
 	} else {
 		// Find home directory.
 		home, err := os.UserHomeDir()
-		ezap.Debugf("Could not found user home directory: %s", err)
+		if err != nil {
+			ezap.Debugf("Could not found user home directory: %s", err)
+		}
 
 		// Search config in home directory with name ".goproxy" (without extension).
 		viper.AddConfigPath(home)

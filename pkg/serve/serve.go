@@ -33,6 +33,11 @@ func serve(r *gin.Engine) error {
 		ezap.Infof("ngrok tunnel created: %s", tun.URL())
 		return r.RunListener(tun)
 	}
+	// allSettings := viper.AllSettings()
+	// ezap.Debug("[Got all settings]")
+	// for key, value := range allSettings {
+	// 	ezap.Debugf("%s: %v", key, value)
+	// }
 
 	// listening on local addr
 	port := ":" + viper.GetString("port")
