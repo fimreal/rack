@@ -18,6 +18,7 @@ import (
 	"github.com/rack-plugins/coord"
 	"github.com/rack-plugins/email"
 	"github.com/rack-plugins/qcloud"
+	// "github.com/rack-plugins/wechatmp"
 )
 
 var MODS = []*module.Module{
@@ -41,9 +42,11 @@ var MODS = []*module.Module{
 	// &shorturl.Module,
 	&coord.Module,
 	&qcloud.Module,
+	// &wechatmp.Module,
 }
 
 func init() {
 	module.Register(MODS)
 	cmd.LoadModuleFlags()
+	module.RunCron()
 }

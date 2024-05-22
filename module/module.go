@@ -1,6 +1,12 @@
 package module
 
 import (
+	"regexp"
+	"strings"
+
+	"github.com/fimreal/goutils/ezap"
+	"github.com/fimreal/rack/pkg/components/crond"
+	"github.com/fimreal/rack/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
@@ -10,6 +16,7 @@ var (
 	RouteFuncs   []func(*gin.Engine)
 	FlagFuncs    []func(*cobra.Command)
 	CliFlagFuncs []func(*cobra.Command)
+	CrondFuncs   map[string]func() = make(map[string]func())
 )
 
 type ModuleInterface interface {
@@ -27,6 +34,7 @@ type Module struct {
 	RoutePrefix string               // route
 	FlagFunc    func(*cobra.Command) // serve flag
 	CliFlagFunc func(*cobra.Command) // flag
+	CrondFunc   map[string]func()    // crond CrondFunc["* * * * *"] = func() { log.Print "do sth at ts" }()
 }
 
 func Register(modules []*Module) {
@@ -57,6 +65,24 @@ func NewFlag(rootCmd *cobra.Command) {
 	}
 }
 
+func RunCron() {
+	for spec, f := range CrondFuncs {
+		if f != nil {
+			job := f // 创建一个新的变量，确保每次循环的 `f` 是独立的
+			id, err := crond.Run(spec, job)
+			if err != nil {
+				ezap.Error(err.Error())
+			}
+			jobName := utils.GetFunctionName(job)
+			ezap.Infof("Add cronjob: %s %s %s", id, spec, jobName)
+			if strings.HasPrefix(spec, "@") {
+				ezap.Infof("Firstly starting cronjob: %s %s", spec, jobName)
+				go func() { job() }()
+			}
+		}
+	}
+}
+
 func (m *Module) Name() string {
 	return m.ID
 }
@@ -74,4 +100,11 @@ func (m *Module) Apply() {
 	ModVersion = append(ModVersion, m.ID)
 	FlagFuncs = append(FlagFuncs, m.FlagFunc)
 	CliFlagFuncs = append(CliFlagFuncs, m.CliFlagFunc)
+	if len(m.CrondFunc) != 0 {
+		for spec, f := range m.CrondFunc {
+			re := regexp.MustCompile(`^\[.*?\] +`)
+			spec = re.ReplaceAllString(spec, "")
+			CrondFuncs[spec] = f
+		}
+	}
 }
