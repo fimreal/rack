@@ -39,7 +39,7 @@ default: docker-build
 all: linux-amd64 linux-armv7 darwin-amd64 darwin-arm64 windows-amd64 # Most used
 
 docker:
-	docker build -t $(APPDIR) .
+	docker build -t $(NAME) .
 
 docker-build:
 	$(GOBUILD) -o $(BINDIR)/$(NAME) $(APPDIR)
