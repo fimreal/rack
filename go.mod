@@ -13,7 +13,7 @@ require (
 	github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2
 	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
 	github.com/rack-plugins/qcloud v0.1.2
-	github.com/rack-plugins/wechatmp v0.0.0-20240528110351-983ae23df168
+	github.com/rack-plugins/wechatmp v0.0.0-20240531065100-d659d614594b
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.17.0
@@ -23,6 +23,7 @@ require (
 	golang.ngrok.com/ngrok v1.9.1
 	golang.org/x/net v0.25.0
 )
+
 
 require (
 	cloud.google.com/go v0.113.0 // indirect

@@ -198,8 +198,8 @@ github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17 h1:FvZLwtZ9pFuB
 github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17/go.mod h1:JcWWskwj8zedeEbe4ZKV54uh1jioA4M4gwj003MtYh8=
 github.com/rack-plugins/qcloud v0.1.2 h1:cgOehoJ0rNF+R8DjMi6+U78D5nC7NueSxvaz74oyKOI=
 github.com/rack-plugins/qcloud v0.1.2/go.mod h1:kR/Wlrf4mzbh6h4UXqzi20P5Muw5HaXh80OX77Hokhg=
-github.com/rack-plugins/wechatmp v0.0.0-20240528110351-983ae23df168 h1:IK0trYmzjXHgpTysWjCDB/gtt1Ace7Oaa2kDnYUbaCs=
-github.com/rack-plugins/wechatmp v0.0.0-20240528110351-983ae23df168/go.mod h1:bkSvBjYcGzCBg4nnoQF/DyH9KCQ5a+4QaTqouTEdDRE=
+github.com/rack-plugins/wechatmp v0.0.0-20240531065100-d659d614594b h1:7EpvSY/daHiM9ghn80sWomv7ALXuk5iOQoDnAbUDQ5s=
+github.com/rack-plugins/wechatmp v0.0.0-20240531065100-d659d614594b/go.mod h1:bkSvBjYcGzCBg4nnoQF/DyH9KCQ5a+4QaTqouTEdDRE=
 github.com/robfig/cron/v3 v3.0.1 h1:WdRxkvbJztn8LMz/QEvLN5sBU+xKpSqwwUO1Pjr4qDs=
 github.com/robfig/cron/v3 v3.0.1/go.mod h1:eQICP3HwyT7UooqI/z+Ov+PtYAWygg1TEWWzGIFLtro=
 github.com/rogpeppe/go-internal v1.11.0 h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDNXVBh4M=
