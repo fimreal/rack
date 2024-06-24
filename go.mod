@@ -13,7 +13,7 @@ require (
 	github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55
 	github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2
 	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
-	github.com/rack-plugins/qcloud v0.1.2
+	github.com/rack-plugins/qcloud v0.1.3
 	github.com/rack-plugins/wechatmp v0.1.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/cobra v1.8.1
