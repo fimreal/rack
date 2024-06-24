@@ -17,7 +17,6 @@ import (
 	"github.com/rack-plugins/chatgpt"
 	"github.com/rack-plugins/coord"
 	"github.com/rack-plugins/email"
-	"github.com/rack-plugins/phone"
 	"github.com/rack-plugins/qcloud"
 	"github.com/rack-plugins/wechatmp"
 )
@@ -39,7 +38,7 @@ var MODS = []*module.Module{
 	// opt
 	&chatgpt.Module,
 	&email.Module,
-	&phone.Module,
+	// &phone.Module, // 待改
 	&aliyun.Module,
 	// &shorturl.Module,
 	&coord.Module,

@@ -13,9 +13,8 @@ require (
 	github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55
 	github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2
 	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
-	github.com/rack-plugins/phone v0.1.0
 	github.com/rack-plugins/qcloud v0.1.2
-	github.com/rack-plugins/wechatmp v0.0.0-20240531082158-32e4e2e13f1c
+	github.com/rack-plugins/wechatmp v0.1.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
@@ -94,7 +93,6 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/vpc v1.0.910 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
-	github.com/xluohome/phonedata v0.0.0-20231114052328-a9241291f8b1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.51.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.51.0 // indirect
