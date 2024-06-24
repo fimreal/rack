@@ -13,12 +13,13 @@ import (
 	"github.com/fimreal/rack/module/scripts"
 	"github.com/fimreal/rack/module/servertime"
 	"github.com/fimreal/rack/pkg/cmd"
+	"github.com/rack-plugins/aliyun"
 	"github.com/rack-plugins/chatgpt"
 	"github.com/rack-plugins/coord"
 	"github.com/rack-plugins/email"
 	"github.com/rack-plugins/phone"
-	// "github.com/rack-plugins/qcloud"
-	// "github.com/rack-plugins/wechatmp"
+	"github.com/rack-plugins/qcloud"
+	"github.com/rack-plugins/wechatmp"
 )
 
 var MODS = []*module.Module{
@@ -39,11 +40,11 @@ var MODS = []*module.Module{
 	&chatgpt.Module,
 	&email.Module,
 	&phone.Module,
-	// &aliyun.Module,
+	&aliyun.Module,
 	// &shorturl.Module,
 	&coord.Module,
-	// &qcloud.Module,
-	// &wechatmp.Module,
+	&qcloud.Module,
+	&wechatmp.Module,
 }
 
 func init() {
