@@ -16,6 +16,7 @@ import (
 	"github.com/rack-plugins/aliyun"
 	"github.com/rack-plugins/chatgpt"
 	"github.com/rack-plugins/coord"
+	"github.com/rack-plugins/coze"
 	"github.com/rack-plugins/email"
 	"github.com/rack-plugins/qcloud"
 	"github.com/rack-plugins/wechatmp"
@@ -44,6 +45,7 @@ var MODS = []*module.Module{
 	&coord.Module,
 	&qcloud.Module,
 	&wechatmp.Module,
+	&coze.Module,
 }
 
 func init() {

@@ -2,7 +2,7 @@ module github.com/fimreal/rack
 
 go 1.21.6
 
-// replace github.com/rack-plugins/phone => ../rack-plugins/phone
+// replace github.com/rack-plugins/coze => ../rack-plugins/coze
 
 require (
 	github.com/fimreal/goutils v0.0.0-20240410031514-d4cb5221bad3
@@ -12,6 +12,7 @@ require (
 	github.com/rack-plugins/aliyun v0.0.0-20240624012422-2b3ac45279d3
 	github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55
 	github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2
+	github.com/rack-plugins/coze v0.0.0-00010101000000-000000000000
 	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
 	github.com/rack-plugins/qcloud v0.1.3
 	github.com/rack-plugins/wechatmp v0.1.0
