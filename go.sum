@@ -210,6 +210,8 @@ github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55 h1:8naRG11ux/
 github.com/rack-plugins/chatgpt v0.0.0-20230523080152-4a69026adc55/go.mod h1:BC+ovAtJ7RKff63Sz50IAZAh/gT0a2b/t5iQXkd6qTc=
 github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2 h1:oG0UBwMdWpP1XxKEsrpf6eYyr3lMLocmu8tf7IwbxAU=
 github.com/rack-plugins/coord v0.0.0-20230830071718-8d1fcc5af2c2/go.mod h1:qWS8ymUqerr8D5hocbPgV/hP2HwlpR5OwCwK9D3PHq8=
+github.com/rack-plugins/coze v0.0.0-20240730103329-595ebd51a5d8 h1:GFqYzro1x83Pa2z61E4IyW+yvudb+4jNmzFxDVmKbBU=
+github.com/rack-plugins/coze v0.0.0-20240730103329-595ebd51a5d8/go.mod h1:91dcc9WvSje4vWhIU9OYtRpm7GZnaWOpvdGJorgEaV0=
 github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17 h1:FvZLwtZ9pFuB/ts6yrtlj9KXb8BYwdWE0Bb59c9N7ac=
 github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17/go.mod h1:JcWWskwj8zedeEbe4ZKV54uh1jioA4M4gwj003MtYh8=
 github.com/rack-plugins/qcloud v0.1.3 h1:ZVSRX129dBzc/nHUcvC7m6TU38ghYnYEcpNUE4gFENU=
