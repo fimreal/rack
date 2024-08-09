@@ -2,7 +2,7 @@ module github.com/fimreal/rack
 
 go 1.21.6
 
-// replace github.com/rack-plugins/coze => ../rack-plugins/coze
+// replace github.com/rack-plugins/wechatmp => ../rack-plugins/wechatmp
 
 require (
 	github.com/fimreal/goutils v0.0.0-20240410031514-d4cb5221bad3
@@ -15,7 +15,7 @@ require (
 	github.com/rack-plugins/coze v1.0.1
 	github.com/rack-plugins/email v0.0.0-20230524021554-7a1204843d17
 	github.com/rack-plugins/qcloud v0.1.3
-	github.com/rack-plugins/wechatmp v0.1.0
+	github.com/rack-plugins/wechatmp v0.2.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.17.0
