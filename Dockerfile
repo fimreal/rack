@@ -5,12 +5,12 @@ RUN cd /srv/rack &&\
     make docker-build &&\
     ls -l bin 
 
-# 下载证书
+# download ca-certificates
 FROM alpine:latest as ca
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk --no-cache add ca-certificates
 
-# 
+# get the final image
 FROM scratch
 LABEL source.url="https://github.com/fimreal/rack"
 

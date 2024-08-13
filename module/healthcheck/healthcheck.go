@@ -11,7 +11,8 @@ import (
 // @Produce     plain
 // @Success     200 {string} string "ok"
 // @Router      /health [get]
-func healthcheck(r *gin.Engine) {
+func healthcheck(g *gin.Engine) {
+	r := g.Group(RoutePrefix)
 	r.GET("/health", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})

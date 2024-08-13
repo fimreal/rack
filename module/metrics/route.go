@@ -1,4 +1,4 @@
-package healthcheck
+package metrics
 
 import (
 	"github.com/gin-gonic/gin"
@@ -10,5 +10,7 @@ func AddRoute(g *gin.Engine) {
 		return
 	}
 
-	healthcheck(g)
+	r := g.Group(RoutePrefix)
+
+	r.GET("/status", ShowStatus)
 }

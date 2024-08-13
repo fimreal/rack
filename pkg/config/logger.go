@@ -6,10 +6,10 @@ import (
 )
 
 func setLogger() {
-	ezap.SetLogTime("")
-
 	if viper.GetBool("debug") {
 		ezap.SetLevel("debug")
 	}
 	ezap.Debug("logging debug  ✔")
+
+	ezap.SetProjectName("[" + AppName + "]")
 }

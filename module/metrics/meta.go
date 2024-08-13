@@ -1,4 +1,4 @@
-package nosniffing
+package metrics
 
 import (
 	"github.com/fimreal/rack/module"
@@ -6,10 +6,10 @@ import (
 )
 
 const (
-	ID            = "nosniffing"
-	Comment       = "refusal of access rules"
+	ID            = "metrics"
+	Comment       = "metrics api"
 	RoutePrefix   = "/"
-	DefaultEnable = true
+	DefaultEnable = false
 )
 
 var Module = module.Module{

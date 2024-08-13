@@ -6,13 +6,13 @@ import (
 )
 
 func AddRoute(g *gin.Engine) {
-	if !viper.GetBool(ID) && !viper.GetBool("allservices") {
+	if !viper.GetBool(ID) && !viper.GetBool("all_services") {
 		return
 	}
 
 	g.Use(gin.LoggerWithConfig(
 		gin.LoggerConfig{
-			SkipPaths: []string{"/favicon.ico", "/health", "/metrics", "/hc", "/"},
+			SkipPaths: []string{"/favicon.ico", "/health", "/metrics"},
 		},
 	))
 	g.GET("/robots.txt", disallowRobots)

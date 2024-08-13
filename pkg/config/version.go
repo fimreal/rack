@@ -2,7 +2,6 @@ package config
 
 import (
 	"github.com/fimreal/goutils/ezap"
-	"github.com/fimreal/rack/module"
 )
 
 func ShowInfo() {
@@ -12,6 +11,9 @@ func ShowInfo() {
 }
 
 func PrintRack() {
+	if AppName != "rack" {
+		return
+	}
 	ezap.Print(
 		` ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
 ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
@@ -27,12 +29,10 @@ func PrintRack() {
 }
 
 func PrintMods() {
-	ezap.Printf("build with Mod: %+v\n", module.ModVersion)
-	for _, mv := range MODVERSION {
-		ezap.Print(mv + " ")
-	}
+	ezap.Printf("build with Module: %+v\n", GetModVer())
 }
 
 func PrintVersion() {
-	ezap.Println("Rack Version: " + VERSION)
+	ezap.Println(AppName + " Version: " + Version)
+	ezap.Println("Build Time: " + BuildTime)
 }

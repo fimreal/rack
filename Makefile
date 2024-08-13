@@ -1,9 +1,12 @@
 NAME=rack
 APPDIR=./
 BINDIR=bin
-VERSION=$(shell git describe --tags || echo "unknown_version")
-BUILDTIME=$(shell date -u)
-GOBUILDARGS=-ldflags '-s -w'
+MODULE_PATH := $(shell go list -m)
+VERSION=$(shell git describe --tags --abbrev=0 2>/dev/null || echo "unknown")
+BUILDTIME=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# go build args
+GOBUILDARGS=-ldflags "-s -w -X ${MODULE_PATH}/pkg/config.AppName=${NAME} -X ${MODULE_PATH}/pkg/config.Version=${VERSION} -X ${MODULE_PATH}/pkg/config.BuildTime=${BUILDTIME}"
 GOBUILD=CGO_ENABLED=0 go build $(GOBUILDARGS)
 
 PLATFORM_LIST = \

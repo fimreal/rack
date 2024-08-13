@@ -6,6 +6,21 @@ import (
 	"github.com/spf13/viper"
 )
 
+var (
+	AppName    = "rack"
+	Version    = ""
+	BuildTime  = ""
+	ModVersion []string
+)
+
+func AddModVer(mv string) {
+	ModVersion = append(ModVersion, mv)
+}
+
+func GetModVer() []string {
+	return ModVersion
+}
+
 func LoadConfigs() {
 	// shell 不允许带'.'的环境变量，识别环境变量时修改为_
 	viper.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
@@ -14,5 +29,4 @@ func LoadConfigs() {
 
 	// 配置日志格式
 	setLogger()
-
 }

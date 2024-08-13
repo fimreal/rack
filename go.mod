@@ -7,6 +7,7 @@ go 1.21.6
 require (
 	github.com/fimreal/goutils v0.0.0-20240410031514-d4cb5221bad3
 	github.com/gin-contrib/cors v1.7.2
+	github.com/gin-contrib/static v1.1.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/cobra v1.8.1

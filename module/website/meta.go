@@ -1,4 +1,4 @@
-package nosniffing
+package website
 
 import (
 	"github.com/fimreal/rack/module"
@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	ID            = "nosniffing"
-	Comment       = "refusal of access rules"
+	ID            = "website"
+	Comment       = "embed website"
 	RoutePrefix   = "/"
 	DefaultEnable = true
 )

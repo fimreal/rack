@@ -77,13 +77,13 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}
-      - name: Build and push from alpine
-        uses: docker/build-push-action@v6
-        with:
-          platforms: linux/amd64,linux/arm64
-          push: true
-          file: Dockerfile-alpine-tzdata
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/rack:alpine
-            ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}-alpine
+      # - name: Build and push from alpine
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     file: Dockerfile-alpine-tzdata
+      #     tags: |
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/rack:alpine
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/rack:${{ env.GIT_TAG }}-alpine
 

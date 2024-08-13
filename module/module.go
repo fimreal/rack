@@ -6,13 +6,13 @@ import (
 
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/pkg/components/crond"
+	"github.com/fimreal/rack/pkg/config"
 	"github.com/fimreal/rack/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
 
 var (
-	ModVersion   = []string{}
 	RouteFuncs   []func(*gin.Engine)
 	FlagFuncs    []func(*cobra.Command)
 	CliFlagFuncs []func(*cobra.Command)
@@ -97,7 +97,7 @@ func (m *Module) RouterGroup() string {
 
 func (m *Module) Apply() {
 	RouteFuncs = append(RouteFuncs, m.RouteFunc)
-	ModVersion = append(ModVersion, m.ID)
+	config.AddModVer(m.ID)
 	FlagFuncs = append(FlagFuncs, m.FlagFunc)
 	CliFlagFuncs = append(CliFlagFuncs, m.CliFlagFunc)
 	if len(m.CrondFunc) != 0 {

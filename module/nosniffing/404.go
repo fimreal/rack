@@ -6,6 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+const (
+	NOROUTEMSG = "404 page not found\n"
+	ROBOTSTXT  = "User-agent: *\nDisallow: /"
+)
+
 // @Summary     robots.txt 配置
 // @Description deny spider bot
 // @Produce     plain
