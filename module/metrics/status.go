@@ -7,8 +7,9 @@ import (
 
 func ShowStatus(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"appname": config.AppName,
-		"version": config.Version,
-		"modules": config.GetModVer(),
+		"app_name":   config.AppName,
+		"version":    config.Version,
+		"build_time": config.BuildTime,
+		"modules":    config.GetModVer(),
 	})
 }

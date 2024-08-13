@@ -20,6 +20,6 @@ func disallowRobots(c *gin.Context) {
 	c.String(http.StatusOK, ROBOTSTXT)
 }
 
-func helloWorld(c *gin.Context) {
+func noRouteMsg(c *gin.Context) {
 	c.String(http.StatusNotFound, NOROUTEMSG)
 }

@@ -19,7 +19,7 @@ func Run() {
 
 	// gin 中间件配置
 	allowedOrigins = viper.GetStringSlice("cors_allowed_origins")
-	g.Use(gin.Recovery(), Cors())
+	g.Use(gin.Recovery(), Cors(), gin.LoggerWithConfig(gin.LoggerConfig{SkipPaths: []string{"/favicon.ico", "/health", "/metrics"}}))
 
 	module.GinLoad(g)
 	ezap.Fatal(serve(g))
