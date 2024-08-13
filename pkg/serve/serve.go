@@ -12,11 +12,14 @@ import (
 func Run() {
 	config.ShowInfo()
 	if !viper.GetBool("debug") {
-		gin.SetMode(gin.ReleaseMode) // Default mode is debug, please switch to "release" mode in production.
+		gin.SetMode(gin.ReleaseMode)
 	}
 	// new gin engine with recovery()
 	g := gin.New()
-	g.Use(gin.Recovery())
+
+	// gin 中间件配置
+	allowedOrigins = viper.GetStringSlice("cors_allowed_origins")
+	g.Use(gin.Recovery(), Cors())
 
 	module.GinLoad(g)
 	ezap.Fatal(serve(g))
@@ -33,11 +36,6 @@ func serve(r *gin.Engine) error {
 		ezap.Infof("ngrok tunnel created: %s", tun.URL())
 		return r.RunListener(tun)
 	}
-	// allSettings := viper.AllSettings()
-	// ezap.Debug("[Got all settings]")
-	// for key, value := range allSettings {
-	// 	ezap.Debugf("%s: %v", key, value)
-	// }
 
 	// listening on local addr
 	port := ":" + viper.GetString("port")

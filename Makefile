@@ -1,7 +1,7 @@
 NAME=rack
 APPDIR=./
 BINDIR=bin
-VERSION=$(shell git describe --tags || echo "unknown version")
+VERSION=$(shell git describe --tags || echo "unknown_version")
 BUILDTIME=$(shell date -u)
 GOBUILDARGS=-ldflags '-s -w'
 GOBUILD=CGO_ENABLED=0 go build $(GOBUILDARGS)

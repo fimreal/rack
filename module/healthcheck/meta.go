@@ -7,7 +7,7 @@ import (
 
 const (
 	ID            = "healthcheck"
-	Comment       = "healthcheck 查询"
+	Comment       = "healthcheck api"
 	RoutePrefix   = "/"
 	DefaultEnable = true
 )

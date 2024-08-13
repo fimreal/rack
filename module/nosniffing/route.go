@@ -17,5 +17,4 @@ func AddRoute(g *gin.Engine) {
 	))
 	g.GET("/robots.txt", disallowRobots)
 	g.NoRoute(helloWorld)
-
 }

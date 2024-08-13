@@ -1,4 +1,0 @@
-[submodule "module/scripts/static"]
-	path = module/scripts/static
-	url = https://github.com/fimreal/oneclick-scripts.git
-	branch = gh-pages

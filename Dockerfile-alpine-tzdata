@@ -1,5 +1,6 @@
 FROM golang:latest as builder
 COPY . /srv/rack
+# ENV GOPROXY="https://goproxy.cn,direct"
 RUN cd /srv/rack &&\
     make docker-build &&\
     ls -l bin 

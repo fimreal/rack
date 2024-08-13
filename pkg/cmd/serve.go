@@ -22,19 +22,24 @@ var serveCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(serveCmd)
 	serveCmd.Flags().StringP("configFile", "c", "", "set config file")
-	serveCmd.Flags().BoolP("daemon", "D", false, "daemon mode")
-	serveCmd.Flags().StringP("port", "p", "3333", "set listen port")
 	serveCmd.Flags().StringP("workdir", "w", ".", "set application working floder")
-	serveCmd.Flags().BoolP("allservices", "a", false, "enable all service")
+
+	serveCmd.Flags().BoolP("daemon", "D", false, "daemon mode")
+	serveCmd.Flags().StringP("listen_address", "l", "", "set listen address")
+	serveCmd.Flags().StringP("port", "p", "3333", "set listen port")
+
+	serveCmd.Flags().BoolP("all_services", "a", false, "enable all service")
+	serveCmd.Flags().BoolP("cors", "", false, "enable cors")
+	serveCmd.Flags().StringSlice("cors_allowed_origins", []string{"http://localhost", "http://127.0.0.1"}, "cors origins config")
 
 	// ngrok
 	serveCmd.Flags().BoolP("ngrok", "n", false, "expose to ngrok")
-	serveCmd.Flags().String("ngrok.token", "", "ngrok auth token, find in https://dashboard.ngrok.com/get-started/your-authtoken")
-	serveCmd.Flags().String("ngrok.domain", "", "custom domain, eg. my-domain.ngrok.io")
+	serveCmd.Flags().String("ngrok_token", "", "ngrok auth token, find in https://dashboard.ngrok.com/get-started/your-authtoken")
+	serveCmd.Flags().String("ngrok_domain", "", "custom domain, eg. my-domain.ngrok.io")
 
 	// // services
 	// serveCmd.Flags().Bool("swagger", false, "swagger docs")
-	// serveCmd.Flags().BoolP("fileserver", "f", false, "启用文件上传下载服务")
+	// serveCmd.Flags().BoolP("fileserver", "f", false, "启用简单文件服务")
 
 	// viper bind
 	viper.BindPFlags(serveCmd.Flags())

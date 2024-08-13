@@ -5,26 +5,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
+const (
 	NOROUTEMSG = "Hey, world!\n"
 	ROBOTSTXT  = "User-agent: *\nDisallow: /"
 )
 
 const (
 	ID            = "nosniffing"
-	Comment       = "避免嗅探功能"
+	Comment       = "refusal of access rules"
 	RoutePrefix   = "/"
 	DefaultEnable = true
 )
 
 var Module = module.Module{
-	ID:      ID,
-	Comment: Comment,
-	// gin route
+	ID:          ID,
+	Comment:     Comment,
 	RouteFunc:   AddRoute,
 	RoutePrefix: RoutePrefix,
-	// cobra flag
-	FlagFunc: ServeFlag,
+	FlagFunc:    ServeFlag,
 }
 
 func ServeFlag(serveCmd *cobra.Command) {

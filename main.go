@@ -5,7 +5,7 @@ import (
 )
 
 // @title    rack
-// @version  0.6
+// @version  nil
 func main() {
 	cmd.Execute()
 }
