@@ -3,13 +3,13 @@ testdata_dir = "tmp"
 tmp_dir = "bin"
 
 [build]
-  full_bin = "./bin/main serve"
-  bin = "bin/main"
-  args_bin = ["-d","-a"]
-  cmd = "go build -o ./bin/main ."
+  full_bin = "./bin/rack serve"
+  bin = "bin/rack"
+  args_bin = ["-d","-a", "-w","./tmp"]
+  cmd = "go build -o ./bin/rack ."
   delay = 1000
   exclude_dir = ["assets", "bin", "vendor", "tmp"]
-  exclude_file = []
+  exclude_file = ["*.db"]
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false

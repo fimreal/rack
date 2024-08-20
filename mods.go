@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/fimreal/rack/module"
+	"github.com/fimreal/rack/module/auth"
 	"github.com/fimreal/rack/module/healthcheck"
 	"github.com/fimreal/rack/module/metrics"
 	"github.com/fimreal/rack/module/nosniffing"
@@ -15,6 +16,7 @@ var MODS = []*module.Module{
 	&nosniffing.Module,
 	&metrics.Module,
 	&website.Module,
+	&auth.Module,
 }
 
 func init() {

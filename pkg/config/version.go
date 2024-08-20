@@ -14,6 +14,7 @@ func PrintRack() {
 	if AppName != "rack" {
 		return
 	}
+	return
 	ezap.Print(
 		` ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
 ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
