@@ -30,6 +30,9 @@ func ServeMetrics() {
 	})
 	m.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
+	// gin metrics
+	useGinMetrics(m)
+
 	port := ":" + viper.GetString("metrics_port")
 	ezap.Info("metrics server started on " + port)
 	ezap.Error(m.Run(port))

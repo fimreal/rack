@@ -8,7 +8,7 @@ import (
 const (
 	ID            = "nosniffing"
 	Comment       = "Block malicious probes. Built-in rules to identify and intercept simple malicious visits."
-	RoutePrefix   = "/api/nosniffing"
+	RoutePrefix   = "/nosniffing"
 	DefaultEnable = true
 )
 

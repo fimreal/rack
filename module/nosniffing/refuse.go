@@ -18,6 +18,7 @@ type bannedIP struct {
 }
 
 var (
+	blackUri  = []string{"/wp-admin", "/wp-content", "/.env"}
 	bannedIPs = make(map[string]bannedIP) // 存储被禁止的 IP 地址
 	mu        sync.Mutex
 )
@@ -102,11 +103,12 @@ func checkBannedIPs(c *gin.Context) {
 func maliciousRequestChecker(c *gin.Context) {
 	requestPath := c.Request.URL.Path
 
-	// 检查请求路径是否包含恶意路由
-	if strings.HasSuffix(requestPath, ".php") {
-		// 调用圈套处理函数禁止访问
-		trapHandler(c)
-		return
+	for _, uri := range blackUri {
+		if strings.Contains(requestPath, uri) {
+			// 调用圈套处理函数禁止访问
+			trapHandler(c)
+			return
+		}
 	}
 
 	c.Next()
