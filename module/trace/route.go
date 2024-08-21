@@ -1,4 +1,4 @@
-package metrics
+package trace
 
 import (
 	"github.com/gin-gonic/gin"
@@ -10,7 +10,6 @@ func AddRoute(g *gin.Engine) {
 		return
 	}
 
-	r := g.Group(RoutePrefix)
-
-	r.GET("/status", ShowStatus)
+	// 加载 opentelemetry
+	LoadOtel(g)
 }

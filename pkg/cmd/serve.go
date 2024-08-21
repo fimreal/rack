@@ -4,6 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"github.com/fimreal/rack/pkg/components/metrics"
 	"github.com/fimreal/rack/pkg/serve"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -15,6 +16,7 @@ var serveCmd = &cobra.Command{
 	Short: "flags for Starting (gin) web service",
 	Long:  `flags for Starting (gin) web service`,
 	Run: func(cmd *cobra.Command, args []string) {
+		go metrics.ServeMetrics()
 		serve.Run()
 	},
 }
@@ -37,7 +39,9 @@ func init() {
 	serveCmd.Flags().String("ngrok_token", "", "ngrok auth token, find in https://dashboard.ngrok.com/get-started/your-authtoken")
 	serveCmd.Flags().String("ngrok_domain", "", "custom domain, eg. my-domain.ngrok.io")
 
-	// // services
+	// services
+	serveCmd.Flags().Bool("metrics", false, "metrics api")
+	serveCmd.Flags().String("metrics_port", "9090", "metrics port")
 	// serveCmd.Flags().Bool("swagger", false, "swagger docs")
 	// serveCmd.Flags().BoolP("fileserver", "f", false, "启用简单文件服务")
 

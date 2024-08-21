@@ -30,14 +30,14 @@ func addAccountRoutes(g *gin.RouterGroup) {
 	// docs.SwaggerInfo.BasePath = "/account"
 	// account := g.Group(docs.SwaggerInfo.BasePath)
 	// g.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r := g.Group("/account")
+	account := g.Group("/account")
 	h, err := NewHandler()
 	if err != nil {
 		ezap.Fatal(err)
 	}
-	r.POST("/signin", h.Signin)
-	r.POST("/login", h.Login)
+	account.POST("/signin", h.Signin)
+	account.POST("/login", h.Login)
 
-	r.POST("/token/validate", h.IsValidToken)
-	r.POST("/token/renew", h.RenewToken)
+	account.POST("/token/validate", h.IsValidToken)
+	account.POST("/token/renew", h.RenewToken)
 }

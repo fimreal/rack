@@ -18,6 +18,7 @@
 *.zip
 *.BIN
 *.bin
+*.db
 bin
 tmp
 .DS_Store

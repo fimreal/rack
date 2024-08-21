@@ -38,7 +38,14 @@ func serve(r *gin.Engine) error {
 	}
 
 	// listening on local addr
+	var listen string
+	address := viper.GetString("listen_address")
 	port := ":" + viper.GetString("port")
-	ezap.Infof("Listening on %s", port)
-	return r.Run(port)
+	if address != "" {
+		listen = address + port
+	} else {
+		listen = port
+	}
+	ezap.Infof("Listening on %s", listen)
+	return r.Run(listen)
 }

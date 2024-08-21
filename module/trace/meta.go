@@ -1,4 +1,5 @@
-package metrics
+// 无用
+package trace
 
 import (
 	"github.com/fimreal/rack/module"
@@ -6,8 +7,8 @@ import (
 )
 
 const (
-	ID            = "metrics"
-	Comment       = "metrics api"
+	ID            = "trace"
+	Comment       = "trace "
 	RoutePrefix   = "/"
 	DefaultEnable = false
 )

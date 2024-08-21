@@ -64,6 +64,7 @@ func NewInstance(config *DatabaseConfig) (*gorm.DB, error) {
 	case "mysql":
 		// 构建 MySQL DSN
 		dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", config.User, config.Password, config.Host, config.Port, config.DBName)
+		ezap.Infof("使用 MySQL 数据库: %s", config.DBName)
 		db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 		if err != nil {
 			return nil, fmt.Errorf("failed to connect to MySQL: %w", err)
@@ -73,6 +74,7 @@ func NewInstance(config *DatabaseConfig) (*gorm.DB, error) {
 	case "postgres":
 		// 构建 PostgreSQL DSN
 		dsn = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", config.Host, config.Port, config.User, config.Password, config.DBName)
+		ezap.Infof("使用 PostgreSQL 数据库: %s", config.DBName)
 		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 		if err != nil {
 			return nil, fmt.Errorf("failed to connect to PostgreSQL: %w", err)
@@ -89,7 +91,7 @@ func NewInstance(config *DatabaseConfig) (*gorm.DB, error) {
 			dsn = path.Join(workDir, config.DBName)
 		}
 		dsn = dsn + ".db"
-		ezap.Infof("使用内置 sqlite 数据库: %s", dsn)
+		ezap.Warnf("使用内 sqlite 数据库: %s", dsn)
 		db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 		if err != nil {
 			return nil, fmt.Errorf("failed to connect to SQLite: %w", err)

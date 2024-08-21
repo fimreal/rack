@@ -24,8 +24,8 @@ var Module = module.Module{
 // 根据需要配置数据库 dsn
 func ServeFlag(serveCmd *cobra.Command) {
 	serveCmd.Flags().Bool(ID, DefaultEnable, Comment)
-	serveCmd.Flags().String("jwt_seed", "", "jwt seed")
-	serveCmd.Flags().String("jwt_signingmethod", "", "jwt sign method, hmac sha256 or rsa")
+	serveCmd.Flags().String("jwt_secret", "", "jwt secret")
+	serveCmd.Flags().String("jwt_signingmethod", "", "jwt sign method, HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512, PS256, PS384, PS512")
 	serveCmd.Flags().String("db_driver", "sqlite", "database driver, mysql sqlite postgresql")
 	serveCmd.Flags().String("db_host", "", "database host")
 	serveCmd.Flags().Int("db_port", 0, "database port")

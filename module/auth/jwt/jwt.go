@@ -20,7 +20,7 @@ func SetJWTSecret(secret string) {
 	Secret = secret
 	if Secret == "" {
 		Secret = uuid.New().String()
-		ezap.Warn("未配置 auth seed 值, 自动生成使用(仅供临时测试使用): ", Secret)
+		ezap.Warn("未配置 auth secret 值, 自动生成(仅用作测试环境)使用: ", Secret)
 	}
 }
 
@@ -53,7 +53,7 @@ func SetJWTSigningMethod(method string) {
 	default:
 		SigningMethod = jwt.SigningMethodHS256
 	}
-	ezap.Debugf("设置 jwt 签名方法: %s", method)
+	ezap.Debugf("jwt 签名算法: %s", SigningMethod.Alg())
 }
 
 func CreateToken(id uint, expire int64, secret string) (string, error) {
