@@ -2,7 +2,9 @@ package utils
 
 import (
 	"net"
+	"os/exec"
 	"regexp"
+	"runtime"
 	"strings"
 )
 
@@ -48,4 +50,21 @@ func IsUsername(username string) bool {
 	pattern := `^[a-z][_.-a-z0-9]{2,31}$`
 	re := regexp.MustCompile(pattern)
 	return re.MatchString(username)
+}
+
+// Browser 打开系统默认浏览器并导航到指定的 URL
+func Browser(url string) error {
+	var err error
+
+	switch runtime.GOOS {
+	case "darwin":
+		err = exec.Command("open", url).Start()
+	case "windows":
+		err = exec.Command("cmd", "/c", "start", "", url).Start()
+	default:
+		// linux 等
+		err = exec.Command("xdg-open", url).Start()
+	}
+
+	return err
 }
