@@ -7,6 +7,7 @@ import (
 	"github.com/fimreal/goutils/ezap"
 	"github.com/fimreal/rack/module/auth/jwt"
 	"github.com/fimreal/rack/module/auth/models"
+	"github.com/fimreal/rack/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -62,8 +63,8 @@ func (h *Handler) Signin(c *gin.Context) {
 	user := models.User{
 		Username:    userData.Username,
 		Password:    string(encodedPassword),
-		Email:       models.Str2NullStr(userData.Email),
-		PhoneNumber: models.Str2NullStr(userData.PhoneNumber),
+		Email:       utils.Str2NullStr(userData.Email),
+		PhoneNumber: utils.Str2NullStr(userData.PhoneNumber),
 		Nickname:    userData.Username,
 	}
 
@@ -110,8 +111,8 @@ func (h *Handler) Login(c *gin.Context) {
 	loginResult := models.LoginResult{
 		ID:          user.ID,
 		Username:    user.Username,
-		Email:       models.NullStr2Str(user.Email),
-		PhoneNumber: models.NullStr2Str(user.PhoneNumber),
+		Email:       utils.NullStr2Str(user.Email),
+		PhoneNumber: utils.NullStr2Str(user.PhoneNumber),
 		Nickname:    user.Nickname,
 		Role:        user.Role,
 

@@ -28,7 +28,7 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(fileConfig, config.LoadConfigs)
+	cobra.OnInitialize(fileConfig, config.LoadConfigs, loadModuleFlags)
 
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "debug mode")
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))
@@ -61,7 +61,7 @@ func fileConfig() {
 	}
 }
 
-func LoadModuleFlags() {
+func loadModuleFlags() {
 	module.NewFlag(rootCmd)
 	module.FlagParse(serveCmd)
 

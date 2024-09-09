@@ -20,10 +20,10 @@ type Letter struct {
 // Mailer is responsible for sending emails.
 type Mailer struct {
 	Username           string `validate:"email"`
-	Password           string
+	Password           string `validate:"required"`
 	SmtpHost           string
 	SmtpPort           int
-	InsecureSkipVerify bool
+	InsecureSkipVerify bool `validate:"required"`
 }
 
 // ViperMailer retrieves mailer configuration from viper.

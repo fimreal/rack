@@ -22,3 +22,7 @@ func NewORM() (*ORM, error) {
 	i, err := db.NewInstance(orm)
 	return &ORM{DB: i}, err
 }
+
+func (o *ORM) AutoMigrateUser() error {
+	return o.DB.AutoMigrate(&User{}, &UserLoginLog{}, &UserToken{}, &PasswordReset{})
+}

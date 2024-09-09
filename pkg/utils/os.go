@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -120,4 +121,21 @@ func humanReadableSize(size int64) string {
 	}
 
 	return fmt.Sprintf("%.2f %s", value, unit)
+}
+
+// Browser 打开系统默认浏览器并导航到指定的 URL
+func Browser(url string) error {
+	var err error
+
+	switch runtime.GOOS {
+	case "darwin":
+		err = exec.Command("open", url).Start()
+	case "windows":
+		err = exec.Command("cmd", "/c", "start", "", url).Start()
+	default:
+		// linux 等
+		err = exec.Command("xdg-open", url).Start()
+	}
+
+	return err
 }

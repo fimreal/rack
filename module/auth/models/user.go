@@ -16,12 +16,13 @@ const (
 	RoleGuest              // 游客
 	RoleUser               // 普通用户
 	RoleSubscriber         // 订阅者
+	RoleBanned             // 封禁用户
 )
 
 // User 表结构
 type User struct {
 	gorm.Model
-	Username    string         `gorm:"column:username;uniqueIndex" validate:"max=32" json:"username"`                      // 登录的用户名
+	Username    string         `gorm:"column:username;uniqueIndex" validate:"required,min=1,max=50" json:"username"`       // 登录的用户名
 	Password    string         `gorm:"column:password;" validate:"min=6,max=32" json:"-"`                                  // 不返回给客户端
 	Email       sql.NullString `gorm:"column:email;uniqueIndex" validate:"email" json:"email,omitempty"`                   // 邮箱
 	PhoneNumber sql.NullString `gorm:"column:phone_number;unique" validate:"numeric,len=11" json:"phone_number,omitempty"` // 11 位手机号码
@@ -29,10 +30,6 @@ type User struct {
 	Avatar      string         `gorm:"column:avatar" json:"avatar,omitempty"`                                              // 用户头像 url
 	Role        int            `gorm:"column:role;default:3" json:"role"`                                                  // 默认角色为游客
 	Status      int            `gorm:"column:status;default:1" json:"status"`                                              // 默认状态为启用
-}
-
-func (o *ORM) AutoMigrateUser() error {
-	return o.DB.AutoMigrate(&User{})
 }
 
 // IsUsernameExists 检查用户名是否已存在
@@ -238,6 +235,14 @@ func (o *ORM) UpdateUserEmail(id uint, email string) error {
 }
 
 // UpdateUserRole 根据 ID 更新用户角色
+// id 对应角色
+// 1:超级管理员
+// 2: 管理员
+// 3：贡献者
+// 4: 游客（默认角色）
+// 5: 普通用户
+// 6: 订阅者
+// 7: 封禁用户
 func (o *ORM) UpdateUserRole(id uint, role int) error {
 	return o.Model(&User{}).Where("id = ?", id).Update("role", role).Error
 }

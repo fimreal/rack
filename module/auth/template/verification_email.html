@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.AppName}} 注册账户验证</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 20px 0;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>尊敬的用户，</h2>
+        <p>感谢您注册《{{.AppName}}》。为了确保您提供的电子邮箱地址有效，请点击以下链接以完成账户的验证过程：</p>
+        <a href="{{.VerificationLink}}">验证您的邮箱</a>
+        <p>如果您未进行此项注册，请忽略此邮件。</p>
+        <p>谢谢您的配合。</p>
+        <p>祝好，<br>{{.AppName}} 团队</p>
+    </div>
+</body>
+</html>

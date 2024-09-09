@@ -27,4 +27,9 @@ type DBLayer interface {
 	UpdateUserEmail(id uint, email string) error
 	UpdateUserRole(id uint, role int) error
 	DeleteUser(id uint) error
+
+	// 检查用户信息是否已经存在
+	IsUsernameExists(username string) (bool, error)
+	IsEmailExists(email string) (bool, error)
+	IsPhoneNumberExists(phone string) (bool, error)
 }

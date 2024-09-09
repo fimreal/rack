@@ -18,8 +18,8 @@ func AddRoute(g *gin.Engine) {
 	// 创建路由组 /api
 	r := g.Group(RoutePrefix)
 
-	// skipPaths 不需要权限验证接口
-	skipPaths := []string{"/api/account/login", "/api/account/signin", "/api/account/token"}
+	// skipPaths 不需要权限验证接口 (prefix)
+	skipPaths := []string{"/api/account/login", "/api/account/signin", "/api/account/token", "/api/account/verify", "/api/account/reset"}
 	r.Use(jwt.JWTMiddleware(skipPaths))
 
 	// 路由组 /api/account
