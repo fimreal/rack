@@ -21,7 +21,7 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
-	serveCmd.Flags().StringP("configFile", "c", "", "set config file")
+	serveCmd.Flags().StringVarP(&cfgFile, "configFile", "c", "", "set config file")
 	serveCmd.Flags().BoolP("daemon", "D", false, "daemon mode")
 	serveCmd.Flags().StringP("port", "p", "3333", "set listen port")
 	serveCmd.Flags().StringP("workdir", "w", ".", "set application working floder")
@@ -37,5 +37,5 @@ func init() {
 	// serveCmd.Flags().BoolP("fileserver", "f", false, "启用文件上传下载服务")
 
 	// viper bind
-	viper.BindPFlags(serveCmd.Flags())
+	_ = viper.BindPFlags(serveCmd.Flags())
 }

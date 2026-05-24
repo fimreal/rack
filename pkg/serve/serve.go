@@ -28,7 +28,7 @@ func serve(r *gin.Engine) error {
 	if viper.GetBool("ngrok") {
 		tun, err := ngrok.New()
 		if err != nil {
-			ezap.Fatal(err.Error())
+			return err
 		}
 		ezap.Infof("ngrok tunnel created: %s", tun.URL())
 		return r.RunListener(tun)
