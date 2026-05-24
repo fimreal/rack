@@ -34,6 +34,7 @@ func upload(c *gin.Context) {
 			"status": "error",
 			"result": "the saveDir " + saveDir + " is invalid",
 		})
+		return
 	} else {
 		saveDir = httpRoot + "/" + saveDir + "/"
 	}
@@ -47,6 +48,7 @@ func upload(c *gin.Context) {
 			"status": "error",
 			"result": err.Error(),
 		})
+		return
 	}
 
 	ezap.Infof("开始接收文件, 存储到 %s", dst)
@@ -58,6 +60,7 @@ func upload(c *gin.Context) {
 			"status": "error",
 			"result": err.Error(),
 		})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "success",

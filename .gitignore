@@ -24,3 +24,6 @@ tmp
 
 httproot
 module/indev
+
+.claude
+.codex
